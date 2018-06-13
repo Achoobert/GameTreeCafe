@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
+
+<script> 
+	// wait for the DOM to be loaded 
+//$(document).ready(function() { 
+	// bind 'myForm' and provide a simple callback function 
+	//$('#myForm').ajaxForm(function() { alert("Thank you for your comment!"); 
+	//XMLHttpRequest("GET", "sql.php", true);  = a variable}); 
+//}); 
+//document.getElementById('button').addEventListener('click', loadText);
+	
+
+function loadText(){
+//?viewid=".($myarray['id'])."&submit=GO' 
+	var view = document.input.newview.value;
+	var appurl = `glist.php?viewid="${view}"&submit=GO`;
+	console.log(appurl);
+	//console.log(appurl);
+	//create new xhr object
+	var xhr = new XMLHttpRequest();
+	// OPEN - type, url/file, async
+	xhr.open('GET', appurl, true); //you can just use the var 
+
+	xhr.onload = function(){
+		console.log('onload');
+		if(this.status == 200){
+			console.log('status');
+			document.getElementById("demo").innerHTML = (this.responseText);
+		}
+	}
+	//document.getElementById("demo").innerHTML = xhr;
+	xhr.send();
+}
+	
+</script> 
+
+</head>
+
+
+<body>
+<!--
+<form id="myForm" action="exp.html" method="post"> 
+    Name: <input type="text" name="name" /> 
+    Comment: <textarea name="comment"></textarea> 
+    <input type="submit" value="Submit Comment" /> 
+</form>
+
+document.getElementById("grade4").innerHTML = grade4;
+<td id="grade4"> </td>
+
+<iframe src="view_game.php"  width="270" height="400	"></iframe> 
+<iframe src="search_game.php"  width="270" height="400	"></iframe> 
+<iframe id="app" src=""></iframe>
+-->
+<form name="input">
+<INPUT type="text" name="newview">
+</form>
+
+
+<button id="button" onclick='loadText()'>Change Content</button>
+
+<p id="demo"></p>
+
+</body>
+</html>
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+

@@ -96,8 +96,12 @@ if( isset($_GET['ord'])){
 		#INSERT INTO `orders` (`id`, `time_ord`, `tnum`, `item`) VALUES (NULL, CURRENT_TIMESTAMP, '13', '4'); DATE_FORMAT(CURRENT_TIMESTAMP, \"%H:%i\") 
 		$sql = "INSERT INTO `orders` (`id`, `time_ord`, `tnum`, `item`) VALUES (NULL, CURRENT_TIMESTAMP, '".$tnum."', '".$item."')";
 		#echo ($item);
-		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
-			echo "New order stored successfully!";#'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+		#to prevent accidental entries
+		if ($tnum == 0){
+			echo "No order placed. Please enter valid number";
+		}
+		elseif (mysqli_query($db, $sql)) { #is query on sql, runs when called
+			echo "Order to table ".$tnum." placed!";#'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
 		} else {
 			echo "Error";
 		}
@@ -106,8 +110,8 @@ if( isset($_GET['ord'])){
 	#stopgap until I figure out prepared statments?
 	if ($ord == 3) { #ord tnum viewid
 		
-		#"DELETE FROM `orders` WHERE `tnum`  = ".$oid."; or.... DELETE FROM `orders` WHERE `tnum`  = 14;
-		$sql = "DELETE FROM `orders` WHERE `tnum`  = ".$tnum;
+		#UPDATE `orders` SET `visible`=[value-5] WHERE `tnum`  =
+		$sql = "UPDATE `orders` SET `visible`=0 WHERE `tnum`  = ".$tnum;
 		#echo ($item);
 		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
 			echo "Table ".$tnum." done!"; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
