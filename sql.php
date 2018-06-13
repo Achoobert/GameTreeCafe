@@ -123,9 +123,9 @@ if( isset($_GET['ord'])){
 	#stopgap until I figure out prepared statments?
 	if ($ord == 2) { #ord tnum viewid
 		
-		#"DELETE FROM `orders` WHERE `id`  = 10;
+		#"update and hide FROM `orders` WHERE `id`  = 10;
 		#sql.php?ord=2&oid=11&tnum=3&submit=GO
-		$sql = "DELETE FROM `orders` WHERE `id`  = ".$oid;
+		$sql = "UPDATE `orders` SET `visible`=0 WHERE `id`  = ".$oid;
 		#echo ($item);
 		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
 			echo "Order ".$oid." done!";#'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
