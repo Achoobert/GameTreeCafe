@@ -50,7 +50,7 @@
 <script type="text/javascript">
   setTimeout(function(){
     location = ''
-  },6000)//1000 = one second
+  },10000)//1000 = one second
   
   function orderComplete(oid, tnum){
 	console.log("order id", oid);
@@ -128,7 +128,7 @@ OLD 2
 					#in here, make box field for active table
 					$tnum_i = $trow['tnum'];
 					echo ("<div style='display: inline-block; float: left;'><fieldset ><legend><h3>Table:".$tnum_i."</h3></legend>");#t divs open
-					$itemsql = "SELECT * FROM `orders` WHERE `tnum` = ".$tnum_i." ORDER BY `item`"; #get active tables
+					$itemsql = "SELECT * FROM `orders` WHERE `visible` = 1 AND `tnum` = ".$tnum_i." ORDER BY `item`"; #get active tables
 					$tresult = mysqli_query($db,$itemsql); #runs when called
 					if(mysqli_num_rows($tresult)>0){
 						#select COUNT(*) FROM orders WHERE  `item` = 1 <iterate this> AND `tnum` = $tnum_i

@@ -115,7 +115,7 @@ if( isset($_GET['ord'])){
 		
 		#echo ($item);
 		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
-			 echo "parent.window.location.reload()";
+			Header('Location: '.$_SERVER['PHP_SELF']);//Header('Location: '.$_SERVER['PHP_SELF']); Exit(); 
 			echo "Table ".$tnum." done!"; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
 		} else {
 			echo "Error";
