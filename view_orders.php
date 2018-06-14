@@ -121,9 +121,9 @@ OLD 2
 			<?php
 			#iterate through active tables
 			#then, iterate through relivant orders in each table
-			$tnumsql = "SELECT DISTINCT `tnum` FROM `orders` ORDER BY `tnum`"; #get active tables
+			$tnumsql = "SELECT DISTINCT `tnum` FROM `orders` WHERE `visible` = 1 ORDER BY `tnum`"; #get active AND visible tables
 			$tnumresult = mysqli_query($db,$tnumsql); #runs when called
-			if(mysqli_num_rows($tnumresult)>0){
+			if(mysqli_num_rows($tnumresult)>0){# If 
 				while($trow = mysqli_fetch_array($tnumresult, MYSQLI_ASSOC)) { #MYSQLI_USE_RESULT
 					#in here, make box field for active table
 					$tnum_i = $trow['tnum'];
@@ -137,8 +137,15 @@ OLD 2
 							$myarr = $irow;
 							$r = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `food` WHERE id =".$myarr['item']));
 							echo ("<button type='button' onclick='orderComplete(". $myarr['id'] .",".$tnum_i.")'>Done</button>  ");#The "completed button
-							echo ( "Item ". $r['fname'].": Time Ordered ". substr($myarr['time_ord'],11,12) ."<br>"); #
 							
+							$datetime1 = new DateTime($myarr['time_ord']);//start time
+							$datetime2 = new DateTime(date("g:i"));//time("H:i:s");//end time time();->format('H:i:s')
+							//$interval = $datetime1->diff($datetime2); // substr($myarr['time_ord'],11,12
+							//$datetime1 = new DateTime('2016-11-30 03:55:06');//start time
+							//$datetime2 = new DateTime('2016-11-30 11:55:06');//end time
+							$interval = $datetime1->diff($datetime2);
+							$waittime = $interval->format('%H hours %i minutes %s seconds');
+							echo ( "Item ". $r['fname'].": Waited: ". $waittime ."<br>"); 
 						}   
 					}
 					echo ("<button type='button' onclick='tableComplete(". $tnum_i .")'>Complete all</button>  ");
