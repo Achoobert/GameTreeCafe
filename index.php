@@ -139,7 +139,34 @@ function orderItem(item){
 	xhr.send();
 }	
 
+function saveUser(){
+//?viewid=".($myarray['id'])."&submit=GO' 
+console.log('loading save user');
+var uname = document.searchinput.uname.value;
+//console.log(uname);
 
+var appurl = `login.get.php?`; //viewid="${view}"&submit=GO`;
+if(uname.length > 0){
+	appurl = appurl.concat(`uname="` , uname, '"');
+}
+
+console.log(appurl);
+//console.log(appurl);
+//create new xhr object
+var xhr = new XMLHttpRequest();
+// OPEN - type, url/file, async
+xhr.open('GET', appurl, true); //you can just use the var 
+
+xhr.onload = function(){
+	//console.log('onload');
+	if(this.status == 200){
+		//console.log('status');
+		document.getElementById("name").innerHTML = (this.responseText); // $_SESSION["username"]
+	}
+}
+//document.getElementById("demo").innerHTML = xhr;
+xhr.send();
+}
 function loadSearch(){
 //?viewid=".($myarray['id'])."&submit=GO' 
 //console.log('in loading');
@@ -269,7 +296,8 @@ function loadFrame() {
     <div class="panel panel-left panel-reveal">
         <div class="content-block">
             <p><?php
-			echo file_get_contents('leftpanel.php');
+			//echo file_get_contents('leftpanel.php');
+			include('leftpanel.php');
 			?></p>
         </div>
     </div>

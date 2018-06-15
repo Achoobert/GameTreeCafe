@@ -17,7 +17,7 @@ if (isset($_GET['submit'])) {
 }
 
 
-switch
+//switch
 
 
    

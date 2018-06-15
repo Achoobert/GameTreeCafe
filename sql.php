@@ -115,7 +115,8 @@ if( isset($_GET['ord'])){
 		
 		#echo ($item);
 		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
-			Header('Location: '.$_SERVER['PHP_SELF']);//Header('Location: '.$_SERVER['PHP_SELF']); Exit(); 
+			$page = '/view_orders.php';
+			echo '<meta http-equiv="Refresh" content="0;' . $page . '">';
 			echo "Table ".$tnum." done!"; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
 		} else {
 			echo "Error";
@@ -130,6 +131,8 @@ if( isset($_GET['ord'])){
 		$sql = "UPDATE `orders` SET `visible`=0 WHERE `id`  = ".$oid;
 		#echo ($item);
 		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
+			$page = '/view_orders.php';
+			echo '<meta http-equiv="Refresh" content="0;' . $page . '">';
 			echo "Order ".$oid." done!";#'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
 		} else {
 			echo "Error";
