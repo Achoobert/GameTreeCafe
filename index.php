@@ -16,7 +16,7 @@ $gamename = 'Game Tree Cafe Home'
 ?>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
     <script src="http://malsup.github.com/jquery.form.js"></script> 
-
+	<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
 
 
 <!-- EXAMPLE CODE -->
@@ -57,17 +57,76 @@ xhr.open('GET', "flist.php?type=2&submit=GO", true); //you can just use the var
 xhr.send(); 
 }
 
+function setTnum(tnum){
+   //Add table number to cookie	
+   //PHPSESSID=din708j157b4rgs82d5d3ptoqv; user="Frank"
+   console.log('saving the table number');
+    var x = decodeURIComponent(document.cookie);
+	var oldcook	 = x.split(';');
+    //document.cookie = oldcook[0] + "; " + oldcook[1] + ";" + "table" + "=" + tnum + ";path=/";
+	document.cookie = "table" + "=" + tnum + ";path=/";
+	console.log(decodeURIComponent(document.cookie));
+}
+function setUname(){
+	var uname = prompt('No order placed. Enter your name and re-submit');
+	if (uname == null){ // this recurses if its still blank
+		setUname();	
+	}
+	var appurl = `login.get.php?`; //viewid="${view}"&submit=GO`;
+	if(uname.length > 0){
+		appurl = appurl.concat(`uname="` , uname, '"');
+	}
+
+	console.log(appurl);
+	//console.log(appurl);
+	//create new xhr object
+	var xhr = new XMLHttpRequest();
+	// OPEN - type, url/file, async
+	xhr.open('GET', appurl, true); //you can just use the var 
+
+	xhr.onload = function(){
+		//console.log('onload');
+		if(this.status == 200){
+			//console.log('status');
+			alert("You may now place orders"+this.responseText);
+			//document.getElementById("demo").innerHTML = (this.responseText);
+		}
+	}
+	//document.getElementById("demo").innerHTML = xhr;
+xhr.send();
+}
 function orderItem(item){
-	var x = decodeURIComponent(document.cookie);
-	var ca	 = x.split(';');
+	//This gets username from cookie
+/* 	var x = decodeURIComponent(document.cookie);
+	//console.log(x);
+	//console.log($.cookie('user'));
+	//console.log($.cookie('table'));
+	//console.log('variables');
+	//var ca	 = x.split(';');
+	//console.log(ca); */
+	console.log($.cookie('user'));
+    var uname = $.cookie('user');
+	console.log(uname);
+	if (uname == null){ // this keeps a cancellation from wiping the cookie
+		console.log('setting');
+		uname = setUname();	
+	}
 	
-    //var c = ((ca[1]).substring(6, length.(ca[1])));
-	console.log(ca);
+	//console.log(uname);
+	uname = uname.substring(1, ((uname.length)-1));
+	// table=2
+	var oldtable = ($.cookie('table') == null ? 'null' : $.cookie('table'));
+	//oldtable = oldtable.substring(7, (oldtable.length));
+	console.log(oldtable);
 	
 	console.log(item);
-	var tnum = prompt("Please Enter your table number");
+	var pr = ("Please Enter your table number, " + uname);
+	var tnum = prompt((pr), (oldtable == 'null' ? '' : oldtable));
+	if (tnum != null){ // this keeps a cancellation from wiping the cookie
+		setTnum(tnum);	
+	}
 	var appurl = '';
-	appurl = appurl.concat("sql.php?ord=1&item=", item ,"&tnum=", tnum ,"&submit=GO");
+	appurl = appurl.concat("sql.php?ord=1&item=", item ,"&tnum=", tnum ,"&uname=", uname ,"&submit=GO");
 	console.log(appurl);
 	var xhr = new XMLHttpRequest();
 	// OPEN - type, url/file, async
@@ -106,8 +165,9 @@ xhr.open('GET', appurl, true); //you can just use the var
 xhr.onload = function(){
 	//console.log('onload');
 	if(this.status == 200){
-		//console.log('status');
-		document.getElementById("name").innerHTML = (this.responseText); // $_SESSION["username"]
+		//console.log('status');   '<br><a href="#" class="link">Home</a>'
+		document.getElementById("name").innerHTML = (this.responseText + '<br><a href="index.php" class="link">Home</a>'); // $_SESSION["username"]
+		
 		var element = document.getElementById("nameform");
 		element.parentNode.removeChild(element);
 	}

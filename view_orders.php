@@ -128,7 +128,7 @@ OLD 2
 					#in here, make box field for active table
 					$tnum_i = $trow['tnum'];
 					echo ("<div style='display: inline-block; float: left;'><fieldset ><legend><h3>Table:".$tnum_i."</h3></legend>");#t divs open
-					$itemsql = "SELECT * FROM `orders` WHERE `visible` = 1 AND `tnum` = ".$tnum_i." ORDER BY `item`"; #get active tables
+					$itemsql = "SELECT * FROM `orders` WHERE `visible` = 1 AND `tnum` = ".$tnum_i." ORDER BY `uname`"; #get active tables
 					$tresult = mysqli_query($db,$itemsql); #runs when called
 					if(mysqli_num_rows($tresult)>0){
 						#select COUNT(*) FROM orders WHERE  `item` = 1 <iterate this> AND `tnum` = $tnum_i
@@ -144,8 +144,8 @@ OLD 2
 							//$datetime1 = new DateTime('2016-11-30 03:55:06');//start time
 							//$datetime2 = new DateTime('2016-11-30 11:55:06');//end time
 							$interval = $datetime1->diff($datetime2);
-							$waittime = $interval->format('%H hours %i minutes %s seconds');
-							echo ( "Item ". $r['fname'].": Waited: ". $waittime ."<br>"); 
+							$waittime = $interval->format('%H hours %i minutes');
+							echo ( $myarr['uname'] .", ". $r['fname'].": Waited: ". $waittime ."<br>"); 
 						}   
 					}
 					echo ("<button type='button' onclick='tableComplete(". $tnum_i .")'>Complete all</button>  ");

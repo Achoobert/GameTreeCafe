@@ -114,21 +114,10 @@
 				<button type="button" onclick="orderItem(<?php echo $viewid; ?>)">Order This Item</button>
 				
 				<?php if (isset($_COOKIE[$cookie_name])) {
-					echo ("<br>Hello ".$_COOKIE[$cookie_name]);
-				} else {
-					echo ('
-					<p id="name"></p>
-						<div id="nameform">
-							Please enter your name for food delivery
-							<form name="searchinput" action="" method="post">
-							Your name: <input type="text" name="uname"><br>				
-							</form>	
-							<button type="button" onclick="saveUser()">Save Name</button>
-					</div>
-					');
-				}	
+					//echo ("<br>Hello ".$_COOKIE[$cookie_name]);
+				} 
 				?>
-                <p class="clear"><?php echo $engdes; ?></p>
+                <p class="clear"><?//php echo $engdes; ?></p>
             </div>
         </div>
     </div>

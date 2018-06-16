@@ -15,6 +15,7 @@
 	$tnum = (isset($_GET['tnum']) ? $_GET['tnum'] : '');
 	$item = (isset($_GET['item']) ? $_GET['item'] : '');
 	$oid = (isset($_GET['oid']) ? $_GET['oid'] : '');
+	$uname = (isset($_GET['uname']) ? $_GET['uname'] : '');
 #case new:
 	#input is gname, genre genre, ptime, pnum, pnumrange, mech mech, vis
 	$viewid = (isset($_POST['viewid']) ? $_POST['viewid'] : '');
@@ -94,14 +95,14 @@ if( isset($_GET['ord'])){
 	#stopgap until I figure out prepared statments?
 	if ($ord == 1) { #ord tnum viewid
 		#INSERT INTO `orders` (`id`, `time_ord`, `tnum`, `item`) VALUES (NULL, CURRENT_TIMESTAMP, '13', '4'); DATE_FORMAT(CURRENT_TIMESTAMP, \"%H:%i\") 
-		$sql = "INSERT INTO `orders` (`id`, `time_ord`, `tnum`, `item`) VALUES (NULL, '". date("g:i") ."', '".$tnum."', '".$item."')"; //date("g:i")
+		$sql = "INSERT INTO `orders` (`id`, `time_ord`, `tnum`, `item`, `uname`) VALUES (NULL, '". date("g:i") ."', '".$tnum."', '".$item."', '".$uname."')"; //date("g:i")
 		#echo ($item);
 		#to prevent accidental entries
 		if ($tnum == 0){
 			echo "No order placed. Please enter valid number";
 		}
 		elseif (mysqli_query($db, $sql)) { #is query on sql, runs when called
-			echo "Order to table ".$tnum." placed!";#'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+			echo "Order will be delivered to ".$uname." at table ".$tnum." soon!";#'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
 		} else {
 			echo "Error";
 		}
