@@ -1,7 +1,7 @@
 <p> 
 <?php
-
-if (isset($_SESSION["username"])) {
+//$len = ;
+if (strlen($_SESSION['username']) > 0) {
 	echo "username is: ";
 	echo $_SESSION["username"];
 } else {

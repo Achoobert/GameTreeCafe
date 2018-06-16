@@ -1,6 +1,4 @@
-<!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->
-
-<!-- Top Navbar-->
+<?php session_start(); ?>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
     <script src="http://malsup.github.com/jquery.form.js"></script> 
 	<div class="navbar">
@@ -40,33 +38,22 @@ echo ('
     <div  class="page">
         <div class="page-content">
             <div class="content-block">');
-
+echo "the uname is:".$_SESSION["username"].".";
 			
 #echo $_GET['uname'];
-switch ($set) {
-    case false:
+if ((strlen($_SESSION['username']) < 1)) {
         echo ('
-			<p id="name">
-                <p>Please enter your name for food delivery</p>
+			<p id="name"></p>
+			<div id="nameform">
+                Please enter your name for food delivery
 				<form name="searchinput" action="" method="post">
 				Your name: <input type="text" name="uname"><br>				
 				
 				</form>	
 				
 				<button type="button" onclick="saveUser()">Save Name</button>
-		</p>
+		</div>
 		');
-        break;
-    case true:
-        echo $_SESSION["username"];
-		//include('view_food.php');
-		
-        break;
-    case label3:
-        echo ('please login');
-        break;
-    default:
-        echo ('please login');
 } 
 
 #logout

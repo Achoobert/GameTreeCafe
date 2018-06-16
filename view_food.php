@@ -1,5 +1,6 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->
 <?php
+	session_start(); 
 	if(!isset($db)){
 		include("config.php");
 	}
@@ -66,7 +67,7 @@
 			#echo $myarray['thaides'];
 		}   
 	}else{
-		$engdes =$thaides = ('Error description not found');
+		$engdes =$thaides = ('');
 		#echo('<br>No game in decription database for ID: ') . $viewid . ('<br>');
 	}
 	
@@ -106,10 +107,18 @@
 					</script>
 				<ul><!--
 				--><strong><li><?php echo $gamename; ?></li><!--
-				--><li>id: <?php echo $viewid; ?></li><!--
+				
 				--><li>Cost: <?php echo $bhat; ?> baht</li>
 				</ul>
+				
 				<button type="button" onclick="orderItem(<?php echo $viewid; ?>)">Order This Item</button>
+				<?php if (isset($_SESSION["lan"])) {
+					echo $_SESSION["lan"];
+				} else {
+					echo ('<a href="login.php" class="link">Login</a>');
+					
+				}	
+				?>
                 <p class="clear"><?php echo $engdes; ?></p>
             </div>
         </div>

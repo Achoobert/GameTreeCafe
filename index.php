@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
-
+<?php
+   include("config.php");
+?>
 <?php
 // Start the session
-session_start();
+//session_start();
 $_SESSION["lan"] = "en";
+$_SESSION["username"] = "";
 $_SESSION["gid"] = 2;
 #echo "Session variables are set.";
 #echo var_dump($_SESSION["lan"]);
@@ -17,70 +20,7 @@ $gamename = 'Game Tree Cafe Home'
 
 
 <!-- EXAMPLE CODE -->
-<?php
-   include("config.php");
-   #session_start();
-   #echo phpinfo();
-    
-   $sql = "SELECT * FROM game_data"; #is string
-   $result = mysqli_query($db,$sql);
-   #echo mysqli_num_rows($result);
-   
-	if( mysqli_num_rows($result)>0){
-		while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { #MYSQLI_USE_RESULT
-			#$game_array[] = (object) array(($row['id']), ($row['gamename']));
-			#echo "newline";
-			#echo " <a href=\"view_game.php?gameid=",urlencode((string)$game_array[0]) ,">", (string)$game_array[1] ,"</a>";
-			#$gamename = $row['gamename'];
-			#echo " Game name ", $row['gamename'], " yes? <br>";
-		}   
-	}
-	else{
-	   echo 'it brings no data....';
-	}
-	
-	$query = "SELECT 'picid-' FROM 'testtable' WHERE 'id' = 1";
-	echo (mysqli_query($db,$query, MYSQLI_USE_RESULT));
-   
-   if($_SERVER["REQUEST_METHOD"] == "POST") {
-      // username and password sent from form 
-      echo "I'm in the if!"; 
-      $myusername = mysqli_real_escape_string($db,$_POST['username']);
-      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
-      
-      $sql = "SELECT id FROM admin WHERE username = '$myusername' and passcode = '$mypassword'";
-      $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      $active = $row['active'];
-      
-      $count = mysqli_num_rows($result);
-      
-      // If result matched $myusername and $mypassword, table row must be 1 row
-		
-      if($count == 1) {
-         session_register("myusername");
-         $_SESSION['login_user'] = $myusername;
-         
-         header("location: welcome.php");
-      }else {
-         $error = "Your Login Name or Password is invalid";
-      }
-	  
-	// Get cURL resource
-	$curl = curl_init();
-	// Set some options - we are passing in a useragent too here
-	curl_setopt_array($curl, array(
-		CURLOPT_RETURNTRANSFER => 1,
-		CURLOPT_URL => 'http://testcURL.com/?item1=value&item2=value2',
-		CURLOPT_USERAGENT => 'User Agent X'
-	));
-	// Send the request & save response to $resp
-	$resp = curl_exec($curl);
-	// Close request to clear up some resources
-	curl_close($curl);
-   }
-   #var_dump(function_exists('curl_version'));
-?>
+
 <!-- END EXAMPLE CODE -->
 <head>
 <script>
@@ -162,6 +102,9 @@ xhr.onload = function(){
 	if(this.status == 200){
 		//console.log('status');
 		document.getElementById("name").innerHTML = (this.responseText); // $_SESSION["username"]
+		document.getElementById("nameform").innerHTML = ('asddddddddddd');
+		var element = document.getElementById("nameform");
+		element.parentNode.removeChild(element);
 	}
 }
 //document.getElementById("demo").innerHTML = xhr;

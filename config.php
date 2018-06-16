@@ -11,5 +11,17 @@
 	}
 	$num = 0;
 	
+	session_start();
+	//$_SESSION["lan"] = "en";
+	//$_SESSION["gid"] = 2;
+	
+	if (isset($_SESSION["username"])) {
+	echo ("<script> console.log('The uname is:".$_SESSION["username"]."');</script>");
+	} else {
+		echo ("<script> console.log('Not saved session');</script>)");
+	}	
+	
+	//<script> console.log('onload');</script>
+	
 	$_SESSION["auth"] = (false);
 ?>
