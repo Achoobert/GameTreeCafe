@@ -58,6 +58,12 @@ xhr.send();
 }
 
 function orderItem(item){
+	var x = decodeURIComponent(document.cookie);
+	var ca	 = x.split(';');
+	
+    //var c = ((ca[1]).substring(6, length.(ca[1])));
+	console.log(ca);
+	
 	console.log(item);
 	var tnum = prompt("Please Enter your table number");
 	var appurl = '';
@@ -102,7 +108,6 @@ xhr.onload = function(){
 	if(this.status == 200){
 		//console.log('status');
 		document.getElementById("name").innerHTML = (this.responseText); // $_SESSION["username"]
-		document.getElementById("nameform").innerHTML = ('asddddddddddd');
 		var element = document.getElementById("nameform");
 		element.parentNode.removeChild(element);
 	}

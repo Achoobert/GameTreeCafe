@@ -6,7 +6,7 @@
 		include("config.php");
 	}
    #include("config.php");
-   session_start();
+   //session_start();
 
 	$viewid = (isset($_GET['viewid']) ? $_GET['viewid'] : ' ');
 	$fname = (isset($_GET['fname']) ? $_GET['fname'] : ' ');#$fname = $_GET['fname'];

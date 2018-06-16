@@ -25,7 +25,7 @@ if (isset($_SESSION["username"])) {
 $cookie_name = "user";
 if (isset($_GET['uname'])){
 	$cookie_value = $_GET['uname'];
-	setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+	setcookie($cookie_name, ';' , $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 	echo "New name is: " . $_GET['uname'];
 } 
 /* ?>

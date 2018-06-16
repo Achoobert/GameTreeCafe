@@ -38,7 +38,7 @@ echo ('
     <div  class="page">
         <div class="page-content">
             <div class="content-block">');
-echo "the current name is:".$_COOKIE[$cookie_name]."."; // $_COOKIE[$cookie_name];
+//echo "the current name is:".$_COOKIE[$cookie_name]."."; // $_COOKIE[$cookie_name];
 			
 #echo $_GET['uname'];
 
@@ -46,7 +46,7 @@ echo "the current name is:".$_COOKIE[$cookie_name]."."; // $_COOKIE[$cookie_name
 
 
 
-if ((strlen($_SESSION['username']) < 1)) {
+//if ((isset($_SESSION["username"])) < 1)) {
         echo ('
 			<p id="name"></p>
 			<div id="nameform">
@@ -59,7 +59,7 @@ if ((strlen($_SESSION['username']) < 1)) {
 				<button type="button" onclick="saveUser()">Save Name</button>
 		</div>
 		');
-} 
+//} 
 
 #logout
 

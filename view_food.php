@@ -1,10 +1,10 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->
 <?php
-	session_start(); 
-	if(!isset($db)){
-		include("config.php");
-	}
-	session_start();
+	//session_start(); 
+	//if(!isset($db)){
+	include("config.php");
+	//}
+	//session_start();
 	#Test crossover
 
    	#get the ID of the game to be viewed
@@ -112,11 +112,20 @@
 				</ul>
 				
 				<button type="button" onclick="orderItem(<?php echo $viewid; ?>)">Order This Item</button>
-				<?php if (isset($_SESSION["lan"])) {
-					echo $_SESSION["lan"];
+				
+				<?php if (isset($_COOKIE[$cookie_name])) {
+					echo ("<br>Hello ".$_COOKIE[$cookie_name]);
 				} else {
-					echo ('<a href="login.php" class="link">Login</a>');
-					
+					echo ('
+					<p id="name"></p>
+						<div id="nameform">
+							Please enter your name for food delivery
+							<form name="searchinput" action="" method="post">
+							Your name: <input type="text" name="uname"><br>				
+							</form>	
+							<button type="button" onclick="saveUser()">Save Name</button>
+					</div>
+					');
 				}	
 				?>
                 <p class="clear"><?php echo $engdes; ?></p>
