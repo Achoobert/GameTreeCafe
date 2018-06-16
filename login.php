@@ -38,9 +38,14 @@ echo ('
     <div  class="page">
         <div class="page-content">
             <div class="content-block">');
-echo "the uname is:".$_SESSION["username"].".";
+echo "the current name is:".$_COOKIE[$cookie_name]."."; // $_COOKIE[$cookie_name];
 			
 #echo $_GET['uname'];
+
+
+
+
+
 if ((strlen($_SESSION['username']) < 1)) {
         echo ('
 			<p id="name"></p>
