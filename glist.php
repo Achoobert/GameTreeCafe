@@ -5,8 +5,9 @@
 	if(!isset($db)){
 		include("config.php");
 	}
-   #include("config.php");
-   session_start();
+   if(!isset($_SESSION)){
+		session_start();
+	}
    #$viewid = $gname = $genre = $ptime = $pnum = '';
 	#($db_field['late']==0 ? ' ' : $db_field['late'])
 	$viewid = (isset($_GET['viewid']) ? $_GET['viewid'] : ' ');

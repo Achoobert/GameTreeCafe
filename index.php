@@ -14,8 +14,8 @@ $_SESSION["gid"] = 2;
 
 $gamename = 'Game Tree Cafe Home'
 ?>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
-    <script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script src="js/jquery.js"></script> 
+    <script src="js/jquery.form.js"></script> 
 	<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
 
 
@@ -270,8 +270,9 @@ function loadFrame() {
             * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
+				frame-src = 'https://www.youtube.com'	
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <meta http-equiv="Content-Security-Policy" content="  default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
 
     <!-- Required meta tags-->
     <meta charset="utf-8">
@@ -358,17 +359,7 @@ function loadFrame() {
 	  ;#let change to eng
   }
 ?>
-
-
-
-
-
-
-
-
-
-
-							   
+						   
                             <!-- Link to another page 
                             <a href="about.html">About app</a>-->
                         </div>

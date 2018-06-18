@@ -4,19 +4,7 @@
 		include("config.php");
 	}
  ?>
-<script> 
-	// wait for the DOM to be loaded 
-//$(document).ready(function() { 
-	// bind 'myForm' and provide a simple callback function 
-	//$('#myForm').ajaxForm(function() { alert("Thank you for your comment!"); 
-	//XMLHttpRequest("GET", "sql.php", true);  = a variable}); 
-//}); 
-//document.getElementById('button').addEventListener('click', loadText);
 	
-
-
-	
-</script>	
 <!-- Top Navbar-->
 <div class="navbar">
     <div class="navbar-inner">
@@ -41,17 +29,19 @@
     <div data-page="search" class="page">
         <div class="page-content">
             <div class="content-block">
-            <p>What kind of game are you needing?</p>
+            <p>Filter Options:</p>
 			
             <p>	
-			<form name="searchinput">	
+			<form name="searchinput">
+<!--			
 				<label for="gname">Game Name:</label>
 					<input type="text" name="gname" value="" id="gname">	
-				Mechanic:<select name="mech">
-					  <label for="name">mechanic:</label>
+-->					
+				Complexity:<select name="complex">
+					  <label for="name">complex:</label>
 					  <option value=''>-Any-</option>
 					  <?php 
-				   $sql = "SELECT * FROM mechanics"; #is string
+				   $sql = "SELECT * FROM com"; #is string
 				   
 				   $result = mysqli_query($db,$sql); #is query on sql, runs when called
 				   #echo mysqli_num_rows($result);
@@ -59,7 +49,7 @@
 						while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { #MYSQLI_USE_RESULT
 							$myarray = $row;
 							#        <option value='                   '>                      </option>
-							echo ( "<option value=' ". $myarray['id'] ."'>".$myarray['mech']."</option>"); #
+							echo ( "<option value=' ". $myarray['id'] ."'>".$myarray['value']."</option>"); #
 						}   
 					}
 					else{
@@ -67,6 +57,7 @@
 					}
 				?>
 				</select>
+				<!--
 				Genre:<select name="genre">	
 				<option value=''>-Any-</option>
 				<?php 
@@ -88,6 +79,7 @@
 					}
 				?>
 				</select>
+				-->
 				Play Time:<select name="ptime">
 				<option value=''>-Any-</option>				
 				<?php 
@@ -107,7 +99,7 @@
 					   echo 'no values :( ';
 					}
 				?>
-				</select><br>
+				</select>
 				Players:<select name="pnum">
 				<option value=''>-Any-</option>				
 				<?php 
@@ -126,7 +118,8 @@
 			</p>	
 
 			<button type="button" onclick="loadAll()">Browse all</button>
-			<button type="button" onclick="loadSearch()">Load Search</button>
+			<button type="button" onclick="loadSearch()">Apply Filter</button>
+			<body onload="loadAll()">
 				</div></p>
 
 

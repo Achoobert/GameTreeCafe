@@ -3,7 +3,9 @@
 	if(!isset($db)){
 		include("config.php");
 	}
-	session_start();
+	if(!isset($_SESSION)){
+		session_start();
+	} 
 	#Test crossover
 
    	#get the ID of the game to be viewed
@@ -36,13 +38,12 @@
 			$timeresult = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `time` WHERE id ='". $myarray['playtimeusual']."'"));
 			$plytm = $timeresult['trange'];
 			
-			$mechresult1 = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `mechanics` WHERE id ='". $myarray['mechanic1']."'"));
-			$mechresult2 = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `mechanics` WHERE id ='". $myarray['mechanic2']."'"));
-			$mech = ($mechresult1['mech'].', '.$mechresult2['mech']);
+			//$mechresult1 = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `mechanics` WHERE id ='". $myarray['mechanic1']."'"));
+			//$mechresult2 = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `mechanics` WHERE id ='". $myarray['mechanic2']."'"));
+			//$mech = ($mechresult1['mech'].', '.$mechresult2['mech']);
 			
-			$genraresult1 = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `genera` WHERE id ='". $myarray['genera1']."'"));
-			$genraresult2 = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `genera` WHERE id ='". $myarray['genera2']."'"));
-			$genera = ($genraresult1['genera'].', '.$genraresult2['genera']);
+			$com = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `com` WHERE id ='". $myarray['complex']."'"));
+			$complex = ($com['value']);
 			
 			#echo " Game name ", $row['gamename'], " yes? <br>";
 		}   
@@ -82,8 +83,7 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-
+   
     <!-- Required meta tags-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -132,9 +132,8 @@
 				<ul><!--
 				--><strong><li>Title: <?php echo $gamename; ?></li>
 				 <?php echo (!$vis ? "<li>THIS ITEM IS HIDDEN: ". $vis."</li>" : ''); ?>
-				<li>Game Id: <?php echo $gid; ?></li><!--
-				--><li>Genera: <?php echo $genera; ?> </li><!--
-				--><li>Mechanics: <?php echo $mech; ?> </li><!--
+				<li>Complexity: <?php echo $complex; ?> </li><!--
+				<li>Mechanics: <?php //echo $mech; ?> </li>
 				--><li>Ideal player number <?php echo $pnum; ?></li><!--
 				--><li>Player count: <?php echo $pnumrange; ?></li><!--
 				--><li>Play time <?php echo $plytm; ?></li></strong>

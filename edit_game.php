@@ -24,11 +24,12 @@ Unnecciary code will be rmove as this will be embeded in edit.php
 		#$viewid = $_GET['viewid'];
 
  ?>
- 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/jquery.js"></script> 
+    <script src="js/jquery.form.js"></script> 
+	<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	
 <script>
- src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"
- src="http://malsup.github.com/jquery.form.js"
 //~~~~~~~~~~~~start of photo uploader~~~~~~~~~~~~
 $(document).ready(function (e) {
 	console.log("ready");

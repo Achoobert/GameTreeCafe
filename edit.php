@@ -1,8 +1,10 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->
 
 <!-- Top Navbar-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
-    <script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script src="js/jquery.js"></script> 
+    <script src="js/jquery.form.js"></script> 
+	<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
+
 <?php
 	include("config.php");
 	include("header.html");
