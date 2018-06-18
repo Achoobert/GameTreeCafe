@@ -30,6 +30,7 @@ Unnecciary code will be rmove as this will be embeded in edit.php
 	<script src="js/jquery.min.js"></script>
 	
 <script>
+<script>
 //~~~~~~~~~~~~start of photo uploader~~~~~~~~~~~~
 $(document).ready(function (e) {
 	console.log("ready");

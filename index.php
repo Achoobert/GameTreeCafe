@@ -178,45 +178,45 @@ xhr.send();
 function loadSearch(){
 //?viewid=".($myarray['id'])."&submit=GO' 
 //console.log('in loading');
-var gname = document.searchinput.gname.value;
+//var gname = document.searchinput.gname.value;
 //console.log(gname);
-var mech = document.searchinput.mech.value;
-//console.log(mech);
-var genre = document.searchinput.genre.value;
+var complex = document.searchinput.complex.value;
+console.log(complex);
+//var genre = document.searchinput.genre.value;
 //console.log(genre);
 var ptime = document.searchinput.ptime.value;
-//console.log(ptime);
+console.log(ptime);
 var pnum = document.searchinput.pnum.value;
-//console.log(pnum);
+console.log(pnum);
 //var view = document.input.newview.value;
 
 var appurl = `glist.php?`; //viewid="${view}"&submit=GO`;
-var and = '&';
-if(gname.length > 0){
+var and = '';
+/* if(gname.length > 0){
 	appurl = appurl.concat(`gname="` , gname, '"');
 	and = '&';
-}
-if(genre.length > 0){
-	appurl = appurl.concat(`genre="` , genre, '"');
+} */
+if(complex.length > 0){
+	appurl = appurl.concat(and, `complex="` , complex, '"');
 	and = '&';
 }
 if(ptime.length > 0){
-	appurl = appurl.concat(`ptime="` , ptime, '"');
+	appurl = appurl.concat(and, `ptime="` , ptime, '"');
 	and = '&';
 }
 if(pnum.length > 0){
-	appurl = appurl.concat(`pnum="` , pnum, '"');
+	appurl = appurl.concat(and, `pnum="` , pnum, '"');
 	and = '&';
 }
-if(mech.length > 0){
+/* if(mech.length > 0){
 	appurl = appurl.concat(`mech="` , mech, '"');
 	and = '&';
-}
+} */
 		
 		
 
 console.log(appurl);
-//console.log(appurl);
+console.log(appurl);
 //create new xhr object
 var xhr = new XMLHttpRequest();
 // OPEN - type, url/file, async
@@ -225,7 +225,7 @@ xhr.open('GET', appurl, true); //you can just use the var
 xhr.onload = function(){
 	//console.log('onload');
 	if(this.status == 200){
-		//console.log('status');
+		console.log('status');
 		document.getElementById("demo").innerHTML = (this.responseText);
 	}
 }

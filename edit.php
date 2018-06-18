@@ -36,6 +36,7 @@ switch ($auth) {
 		');
         break;
     case true:
+		echo ;
         include('edit_game.php');
 		
         break;

@@ -14,7 +14,7 @@
 	$gname = (isset($_GET['gname']) ? $_GET['gname'] : ' ');#$gname = $_GET['gname'];
 	$mech = (isset($_GET['mech']) ? $_GET['mech'] : ' ');
 	#echo ('mech is: ' .$mech . '<br>');
-	$genre = (isset($_GET['genre']) ? $_GET['genre'] : ' ');		
+	$complex = (isset($_GET['complex']) ? $_GET['complex'] : ' ');		
 	$ptime = (isset($_GET['ptime']) ? $_GET['ptime'] : ' ');#$ptime = $_GET['ptime'];
 	$pnum = (isset($_GET['pnum']) ? $_GET['pnum'] : ' ');#$pnum = $_GET['pnum'];
 		#$viewid = $_GET['viewid'];
@@ -33,8 +33,8 @@
 		$searchparam = ($searchparam .$and. "`id` = ".$viewid." AND ");
 		#$and = ' AND ';
 	}
-	if($genre != ' '){
-		$searchparam = ($searchparam .$and. "`genera1` = ".$genre." AND ");
+	if($complex != ' '){
+		$searchparam = ($searchparam .$and. "`complex` = ".$complex." AND ");
 		#$and = ' AND ';
 	}
 	if($ptime != ' '){
@@ -42,12 +42,12 @@
 		#$and = ' AND ';
 	}
 	if($pnum != ' '){
-		$searchparam = ($searchparam .$and. "`idealplyer` = ".$pnum." AND ");
+		$pquery = (" ((`idealplyer` =".$pnum.") OR ( `minplyer` < ".$pnum." AND `maxplyer` >". $pnum."))");
+		$searchparam = ($searchparam .$and. $pquery." AND ");
 	}
-	if($mech != ' '){
-		$searchparam = ($searchparam .$and. "`mechanic1` = ".$mech." AND ");
-	}
-	#echo ('"'.$searchparam.'"');
+	//echo ('<script>console.log("'.$ptime.'")</script>');
+	//SELECT * FROM `game_data` WHERE `playtimeusual` = " 12" AND ((`idealplyer` =" 4") OR ( `minplyer` < " 4" AND `maxplyer` >" 4"))
+	//echo ('"'.$searchparam.'"');
 	
 	
 	#SELECT * FROM `game_data` WHERE `id` = 2 ORDER BY `embedthumbnail`
