@@ -36,8 +36,16 @@ switch ($auth) {
 		');
         break;
     case true:
-		echo ;
-        include('edit_game.php');
+		echo '
+		
+		<a href=
+		"edit_food.php" class="link"><h1>
+		Manage Food<br><br></a>
+		
+		<a href=
+		"edit_game.php" class="link">
+		Manage Games</h1></a>
+		</p>';
 		
         break;
     case label3:

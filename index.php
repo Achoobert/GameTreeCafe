@@ -57,6 +57,23 @@ xhr.open('GET', "flist.php?type=2&submit=GO", true); //you can just use the var
 xhr.send(); 
 }
 
+function loadSnacks(){
+console.log("food");
+var xhr = new XMLHttpRequest();
+// OPEN - type, url/file, async
+xhr.open('GET', "flist.php?type=3&submit=GO", true); //you can just use the var
+//console.log(xhr);
+	xhr.onload = function(){
+		//console.log('onload');
+		if(this.status == 200){
+			//console.log('status');
+			document.getElementById("demo1").innerHTML = (this.responseText);
+		}
+	}
+xhr.send(); 
+}
+
+
 function setTnum(tnum){
    //Add table number to cookie	
    //PHPSESSID=din708j157b4rgs82d5d3ptoqv; user="Frank"
@@ -271,8 +288,10 @@ function loadFrame() {
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
 				frame-src = 'https://www.youtube.com'	
-        -->
+       
     <meta http-equiv="Content-Security-Policy" content="  default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+	-->
+	<meta http-equiv="Content-Security-Policy" content=" img-src 'self' data:; default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
 
     <!-- Required meta tags-->
     <meta charset="utf-8">

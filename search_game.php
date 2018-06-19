@@ -117,14 +117,13 @@
 			</form>
 			</p>	
 
-			<button type="button" onclick="loadAll()">Browse all</button>
+			<!--<button type="button" onclick="loadAll()">Browse all</button>-->
 			<button type="button" onclick="loadSearch()">Apply Filter</button>
-			<body onload="loadAll()">
 				</div></p>
 
 
 				<p id="demo">
-				
+				<div class="d-center"><button type="button" onclick="loadAll()">Browse all</button></div>
 				</div>
 				
             </div>

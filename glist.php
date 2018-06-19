@@ -42,7 +42,7 @@
 		#$and = ' AND ';
 	}
 	if($pnum != ' '){
-		$pquery = (" ((`idealplyer` =".$pnum.") OR ( `minplyer` < ".$pnum." AND `maxplyer` >". $pnum."))");
+		$pquery = (" ((`idealplyer` =".$pnum.") OR ( `minplyer` <= ".$pnum." AND `maxplyer` >=". $pnum."))");
 		$searchparam = ($searchparam .$and. $pquery." AND ");
 	}
 	//echo ('<script>console.log("'.$ptime.'")</script>');

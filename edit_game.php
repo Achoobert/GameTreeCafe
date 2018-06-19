@@ -24,13 +24,17 @@ Unnecciary code will be rmove as this will be embeded in edit.php
 		#$viewid = $_GET['viewid'];
 
  ?>
-    <script src="js/jquery.js"></script> 
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+
+    <link rel="stylesheet" href="css/styles.css">
+	<script src="js/jquery.js"></script> 
     <script src="js/jquery.form.js"></script> 
 	<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
 	<script src="js/jquery.min.js"></script>
 	
 <script>
-<script>
+
 //~~~~~~~~~~~~start of photo uploader~~~~~~~~~~~~
 $(document).ready(function (e) {
 	console.log("ready");
@@ -148,6 +152,7 @@ function fh() {
     }
 } 
 </script>
+
 
 
 
