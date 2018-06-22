@@ -41,11 +41,11 @@
     <div data-page="search" class="page">
         <div class="page-content">
             <div class="content-block">
-            <p>
+            
 			<button type="button" onclick="loadDrink()">Drinks</button>
 			<button type="button" onclick="loadSnacks()">Snacks</button>
 			<button type="button" onclick="loadFood()">Meals</button>			
-			</div></p>
+			</div>
 
 
 				<p id="demo1">   </div>

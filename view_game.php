@@ -33,6 +33,7 @@
 			$gamename = $myarray['gamename'] ;
 			$imgurl = $myarray['embedthumbnail'];
 			$pnum = $myarray['idealplyer'];
+			$youtube = $myarray['youtube'];
 			$pnumrange = ($myarray['minplyer']. ' to '.$myarray['maxplyer']);
 			
 			$timeresult = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `time` WHERE id ='". $myarray['playtimeusual']."'"));
@@ -141,7 +142,9 @@
 				
 				</ul>
                 <!--<p class="clear"><?php echo $engdes; ?></p>-->
-				<iframe src="https://www.youtube.com/embed/sFJ9BniGWD8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				
+				
+				<iframe src="<?php echo $youtube; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
         </div>
     </div>

@@ -290,8 +290,9 @@ function loadFrame() {
 				frame-src = 'https://www.youtube.com'	
        
     <meta http-equiv="Content-Security-Policy" content="  default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-	-->
 	<meta http-equiv="Content-Security-Policy" content=" img-src 'self' data:; default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+	-->
+	
 
     <!-- Required meta tags-->
     <meta charset="utf-8">

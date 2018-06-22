@@ -5,8 +5,18 @@ Unnecciary code will be rmove as this will be embeded in edit.php
 -->
 
 <?php
-   include("config.php");
-//checking if form has been submitted and converting to local variables
+	include("config.php");//this gives USER NON-EDIT priveledges 
+// Start the session
+//session_start();
+$_SESSION["lan"] = "en";
+$_SESSION["username"] = "";
+$_SESSION["gid"] = 2;
+#echo "Session variables are set.";
+#echo var_dump($_SESSION["lan"]);
+
+	
+	
+	//checking if form has been submitted and converting to local variables
 
 		#$gname = $_POST['gname'];
 		#$pnum = $_POST['pnum'];
@@ -32,6 +42,23 @@ Unnecciary code will be rmove as this will be embeded in edit.php
     <script src="js/jquery.form.js"></script> 
 	<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
 	<script src="js/jquery.min.js"></script>
+	<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="edit.php" class="back link">
+                <i class="icon icon-back"></i>
+                <span>Back</span>
+            </a>
+        </div>
+		
+        <div class="center sliding">.</div>
+        <div class="right">
+            <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+        </div>
+    </div>
+</div>
+	
+	
 	
 <script>
 
@@ -108,7 +135,29 @@ function hideGame() {
 	xhr.send(); 
 	
 }
-
+function clearhistory(){
+	console.log("delete");
+	var xhr = new XMLHttpRequest();
+	var appurl = '';
+	var id = document.input.newview.value;
+	var vis = document.visinput.visible.value;
+	console.log(id ," ", vis);
+	appurl = appurl.concat("scripts/adminsql.php?edit=3&id=", id ,"&vis=", vis ,"&submit=GO");
+	console.log(appurl);	
+	var appurl = 
+	// OPEN - type, url/file, async
+	xhr.open('GET', appurl, true); //you can just use the var
+	//console.log(xhr);
+		xhr.onload = function(){
+			//console.log('onload');
+			if(this.status == 200){
+				//console.log('status');
+				document.getElementById("feedback").innerHTML = (this.responseText);
+			}
+		}
+	xhr.send(); 
+	
+}
 
  function fa() {
     var x = document.getElementById("add");
@@ -199,14 +248,11 @@ function fr() {
 			</div>
 			
 			
-		<div id="add" >    
+		<div id="add" style="display:none">    
 			<!--  new item form area-->
 			<p>Here is where new games can be added to the database!</p>		
 		</div>
-		<div id="receipt" >    
-			<!--  new item form area-->
-			<p>Order history</p>		
-		</div>
+		
 
 		<div id="edit" style="display:none">	
 			<!--  edit item form area
@@ -218,7 +264,7 @@ function fr() {
 				
 		</div>
 	
-		<div id="form" >
+		<div id="form" style="display:none">
 			<form name="photo" id="imageUploadForm" enctype="multipart/form-data" action="" method="post">
 				Select image to upload:
 				<input type="file" name="fileToUpload" id="fileToUpload">
@@ -363,45 +409,53 @@ function fr() {
 				</form>				
 				<button type="hideGame" onclick="hideGame()">Submit Change</button> <!-- type="hideGame" onclick="hideGame()-->
 			</div>
-		<div id="receipt" >    
+		<div id="receipt" > 
+<div>		
 			<!--  new item form area-->
-			<p>Order history</p>
+			<p>Order history</p><div>
 			<?php
 			#iterate through active tables
 			#then, iterate through relivant orders in each table
-			$tnumsql = "SELECT DISTINCT `tnum` FROM `orders` WHERE `visible` = 0 ORDER BY `tnum`"; #get active AND visible tables
-			$tnumresult = mysqli_query($db,$tnumsql); #runs when called
-			if(mysqli_num_rows($tnumresult)>0){# If 
-				while($trow = mysqli_fetch_array($tnumresult, MYSQLI_ASSOC)) { #MYSQLI_USE_RESULT
+			$itemsql = "SELECT DISTINCT `item` FROM `orders` WHERE `visible` = 0 ORDER BY `item`"; #get active AND visible tables
+			$itemresult = mysqli_query($db,$itemsql); 
+			$soldtotal = 0;
+			$grosstotal = 0;
+			
+			if(mysqli_num_rows($itemresult)>0){# If 
+				while($irow = mysqli_fetch_array($itemresult, MYSQLI_ASSOC)) { #MYSQLI_USE_RESULT
 					#in here, make box field for active table
-					$tnum_i = $trow['tnum'];
-					echo ("<div style='display: inline-block; float: left;'><fieldset ><legend><h3>Table:".$tnum_i."</h3></legend>");#t divs open
-					$itemsql = "SELECT * FROM `orders` WHERE `visible` = 0 AND `tnum` = ".$tnum_i." ORDER BY `uname`"; #get active tables
-					$tresult = mysqli_query($db,$itemsql); #runs when called
-					if(mysqli_num_rows($tresult)>0){
+					$inum_i = $irow['item'];
+					$title = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `food` WHERE id =".$inum_i));
+					echo ("<div style='display: inline-block; float: left;'><fieldset ><legend><h3>".$title['fname']."</h3></legend>");
+					
+					#Item dive open, begin report
+					$reportsql = "SELECT * FROM `orders` WHERE `visible` = 0 AND `item` = ".$inum_i." ORDER BY `uname`"; #
+					$result = mysqli_query($db,$reportsql); #runs when called
+					$sold = 0;
+					$gross = 0;
+					//$waittime = 0;
+					
+					if(mysqli_num_rows($result)>0){
 						#select COUNT(*) FROM orders WHERE  `item` = 1 <iterate this> AND `tnum` = $tnum_i
-						while($irow = mysqli_fetch_array($tresult, MYSQLI_ASSOC)) { #for everything in THIS table
-							#in here, make box field for active table
-							$myarr = $irow;
+						while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { #for everything realted to this item
+							$myarr = $row;
 							$r = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `food` WHERE id =".$myarr['item']));
-							echo ("<button type='button' onclick='orderComplete(". $myarr['id'] .",".$tnum_i.")'>Done</button>  ");#The "completed button
 							
-							$datetime1 = new DateTime($myarr['time_ord']);//start time
-							$datetime2 = new DateTime(date("g:i"));//time("H:i:s");//end time time();->format('H:i:s')
-							//$interval = $datetime1->diff($datetime2); // substr($myarr['time_ord'],11,12
-							//$datetime1 = new DateTime('2016-11-30 03:55:06');//start time
-							//$datetime2 = new DateTime('2016-11-30 11:55:06');//end time
-							$interval = $datetime1->diff($datetime2);
-							$waittime = $interval->format('%H hours %i minutes');
-							echo ( $myarr['uname'] .", ". $r['fname'].": Waited: ". $waittime ."<br>"); 
+							$sold = $sold+1;//start time
+							$gross = $gross + $r['bhat'];//start time
 						}   
 					}
-					echo ("<button type='button' onclick='tableComplete(". $tnum_i .")'>Complete all</button>  ");
+					echo ("Sold: ". $sold ." Income: ". $gross);
+					$soldtotal = $soldtotal+$sold;//
+					$grosstotal = $grosstotal + $gross;//
 					echo ( "</fieldset> </div>"); #tdivs close
-				}   
+				}
+				echo ("</div><p><b></p></b>");//
 			}else{
 			   echo 'There are no current Orders....';
-			}	
+			}
+	echo ("</div><div style='clear:both;'><br></p><p><b>Total items sold: ". $soldtotal ." Total income: ". $grosstotal ." Bhat</p></b>");//			
+	echo ("<button type='button' onclick='clearhistory()'>Clear all</button> </div> </div>");
 			?>
 
 

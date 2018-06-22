@@ -23,12 +23,12 @@ $$(document).on('deviceready', function() {
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
 myApp.onPageInit('about', function (page) {
     // Do something here for "about" page
-	myApp.alert('Here comes About2 page');
+	console.log('Here comes About2 page');
 })
 
 myApp.onPageInit('view_game', function (page) {
     // Do something here for "about" page
-	myApp.alert('Here comes view1 page');
+	//myApp.alert('Here comes view1 page');
 })
 
 // Option 2. Using one 'pageInit' event handler for all pages:
@@ -43,7 +43,7 @@ $$(document).on('pageInit', function (e) {
 	
 	if (page.name === 'view_game') {
         // Following code will be executed for page with data-page attribute equal to "about"
-        myApp.alert('Here comes view page');
+        //myApp.alert('Here comes view page');
     }
 	
 })
@@ -56,5 +56,5 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
 
 $$(document).on('pageInit', '.page[data-page="view_game"]', function (e) {
     // Following code will be executed for page with data-page attribute equal to "about"
-    myApp.alert('Here comes About page');
+    //myApp.alert('Here comes About page');
 })
