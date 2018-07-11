@@ -28,7 +28,7 @@
     <div data-page="search" class="page">
         <div class="page-content">
             <div class="content-block">
-			<div id="showopt">
+			<div id="btns">
 			 <button onclick="searchOptions()">Show Options</button>
 			 <button type="button" onclick="loadAll()">Browse all</button>
 			</div>
@@ -80,7 +80,8 @@
 				  <input type="number" name="pnum" step="1" max='12' min='1'>
 				  
 			</form>	
-			<button type="button" onclick="loadSearch()">Apply Filter</button>			
+			<button type="button" onclick="loadSearch()">Search</button>			
+			<button type="button" onclick="clearFilter()">Clear</button>			
 		</div>
 		</p>
 

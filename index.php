@@ -76,10 +76,11 @@ xhr.send();
  function searchOptions() {
     var x = document.getElementById("options");
     if (x.style.display === "none") {
-		
+		btns.style.display = "none";
         x.style.display = "block";
 
     } else {
+		btns.style.display = "block";
         x.style.display = "none";
 		form.style.display = "none";
     }
@@ -203,10 +204,13 @@ xhr.onload = function(){
 //document.getElementById("demo").innerHTML = xhr;
 xhr.send();
 }
-function loadSearch(){
-	
-	
+
+function clearFilter(){ //clearFilter
+	document.searchinput.reset();
+}
+function loadSearch(){	
         options.style.display = "none";
+		btns.style.display = "block";
 		//form.style.display = "none";
     
 	

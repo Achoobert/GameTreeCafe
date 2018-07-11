@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<title>Input Number Incrementer</title>
+
+	<link rel="stylesheet" href="css/style.css">
+
+  <script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+  <script src="js/incrementing.js"></script>
+
+</head>
+
+<body>
+
+	<div id="page-wrap">
+
+		<h1>Input Number Incrementer</h1>
+
+    <p>Note: This is a little outdated. Would likely just use &lt;input type='number'> today.</p>
+
+    <?php
+    	if (isset($_POST['french-hens'])) {
+    		echo '<div style="border:1px solid #fc0; padding:10px;margin-top:25px;">';
+    		echo 'The values returned were:  '.implode(', ',array_values($_POST));
+    		echo '</div>';
+    	}
+    ?>
+
+    <form method="post" action="">
+      <div class="numbers-row">
+        <label for="name">French Hens</label>
+        <input type="text" name="french-hens" id="french-hens" value="3">
+      </div>
+      <div class="numbers-row">
+        <label for="name">Turtle Doves</label>
+        <input type="text" name="turtle-doves" id="turtle-doves" value="2">
+      </div>
+      <div class="numbers-row">
+        <label for="name">Partridges</label>
+        <input type="text" name="partridge" id="partridge" value="1">
+      </div>
+      <div class="buttons">
+        <input type="submit" value="Submit" id="submit">
+      </div>
+    </form>
+
+	</div>
+
+</body>
+
+</html>
