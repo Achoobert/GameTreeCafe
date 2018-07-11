@@ -31,52 +31,7 @@
 	
 	
 <!--This Script auto refreshes the whole page-->
-<script type="text/javascript">
-  function orderComplete(oid, tnum){
-	console.log("order id", oid);
-	//var tnum = prompt("Please Enter your table number");
-	var appurl = '';
-	appurl = appurl.concat("sql.php?ord=2&oid=", oid ,"&tnum=", tnum ,"&submit=GO");
-	console.log(appurl);
-	var xhr = new XMLHttpRequest();
-	// OPEN - type, url/file, async
-	xhr.open('GET', appurl, true); //you can just use the var 
-	//alert('btn clicked');
-	xhr.onload = function(){
-		//console.log('onload');
-		if(this.status == 200){
-			//console.log('status');
-			document.getElementById("feedback").innerHTML = (this.responseText);
-		}
-	}
-	xhr.send();
- }
-	//document.getElementById("demo").innerHTML = xhr;
-	//xhr.send();  
-  function tableComplete(table){
-	console.log("table", table);
-	//var tnum = prompt("Please Enter your table number");
-	var appurl = '';
-	appurl = appurl.concat("sql.php?ord=3&tnum=", table ,"&submit=GO");
-	console.log(appurl);
-	var xhr = new XMLHttpRequest();
-	// OPEN - type, url/file, async
-	xhr.open('GET', appurl, true); //you can just use the var 
 
-	xhr.onload = function(){
-		//console.log('onload');
-		if(this.status == 200){
-			//console.log('status');
-			document.getElementById("feedback").innerHTML = (this.responseText);
-		}
-	}
-	//document.getElementById("demo").innerHTML = xhr;
-	xhr.send();
-}	
-  
-  
-  
-</script>
 
 <!-- 
 Only active tables should be shown?
@@ -98,6 +53,29 @@ OLD 2
     <div data-page="about" class="page">
         <div class="page-content">
             <div class="content-block">
+			<script type="text/javascript">
+   function tableComplete(table){
+	console.log("table", table);
+	//var tnum = prompt("Please Enter your table number");
+	var appurl = '';
+	appurl = appurl.concat("sql.php?ord=3&tnum=", table ,"&submit=GO");
+	console.log(appurl);
+	var xhr = new XMLHttpRequest();
+	// OPEN - type, url/file, async
+	xhr.open('GET', appurl, true); //you can just use the var 
+
+	xhr.onload = function(){
+		//console.log('onload');
+		if(this.status == 200){
+			//console.log('status');
+			document.getElementById("feedback").innerHTML = (this.responseText);
+		}
+	}
+	//document.getElementById("demo").innerHTML = xhr;
+	xhr.send();
+}	
+
+</script>
 			<?php
 			#iterate through active tables
 			#then, iterate through relivant orders in each table
@@ -118,7 +96,7 @@ OLD 2
 							#in here, make box field for active table
 							$myarr = $irow;
 							$r = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `food` WHERE id =".$myarr['item']));
-							echo ("<button type='button' onclick='orderComplete(". $myarr['id'] .",".$tnum_i.")'>Cancel</button>  ");#The "completed button
+							echo ("<button type='button' onclick='orderCancel(". $myarr['id'] .",".$tnum_i.")'>Cancel</button>  ");#The "completed button
 							
 							$datetime1 = new DateTime($myarr['time_ord']);//start time
 							$datetime2 = new DateTime(date("g:i"));//time("H:i:s");//end time time();->format('H:i:s')
@@ -130,14 +108,14 @@ OLD 2
 							echo ( $myarr['uname'] .", ". $r['fname'].": Waited: ". $waittime ."<br>"); 
 						}   
 					}
-					echo ("<button type='button' onclick='tableComplete(". $tnum_i .")'>Cancel all</button>  ");
+					//echo ("<button type='button' onclick='tableComplete(". $tnum_i .")'>Cancel all</button>  ");
 					echo ( "</fieldset> </div>"); #tdivs close
 				}   
 			}else{
 			   echo 'There are no current Orders....';
 			}	
 			?>
-
+			<div id="feedback">   </div>
 
 
             </div>

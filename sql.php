@@ -140,6 +140,17 @@ if( isset($_GET['ord'])){
 		}
 
 	}
+	if ($ord == 4) { #USER edit: hide/cancell
+		$sql = "UPDATE `orders` SET `visible`= '0', `Cancel`= '1' WHERE `id` = ". $oid;
+		#echo ($sql);
+		#echo ($item);
+		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
+			echo "item ".$oid." is cancelled: ". $vis; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+		} else {
+			echo "Error ".$oid." not hidden";
+		}
+	}
+
 }	
 ?>
 

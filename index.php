@@ -73,6 +73,17 @@ xhr.open('GET', "flist.php?type=3&submit=GO", true); //you can just use the var
 xhr.send(); 
 }
 
+ function searchOptions() {
+    var x = document.getElementById("options");
+    if (x.style.display === "none") {
+		
+        x.style.display = "block";
+
+    } else {
+        x.style.display = "none";
+		form.style.display = "none";
+    }
+}
 
 function setTnum(tnum){
    //Add table number to cookie	
@@ -193,6 +204,12 @@ xhr.onload = function(){
 xhr.send();
 }
 function loadSearch(){
+	
+	
+        options.style.display = "none";
+		//form.style.display = "none";
+    
+	
 //?viewid=".($myarray['id'])."&submit=GO' 
 //console.log('in loading');
 //var gname = document.searchinput.gname.value;
@@ -278,6 +295,28 @@ function loadFrame() {
 	var appurl = `glist.php?gname="${gname}"&mech="${mech}"&genre="${genre}"&ptime="${ptime}"&pnum="${pnum}"&submit=GO`;
 	document.getElementById("app").src = appurl;
 }
+
+function orderCancel(oid, tnum){
+	console.log("order id", oid);
+	//var tnum = prompt("Please Enter your table number");
+	var appurl = '';
+	appurl = appurl.concat("sql.php?ord=4&oid=", oid ,"&tnum=", tnum ,"&submit=GO");
+	console.log(appurl);
+	var xhr = new XMLHttpRequest();
+	// OPEN - type, url/file, async
+	xhr.open('GET', appurl, true); //you can just use the var 
+	//alert('btn clicked');
+	xhr.onload = function(){
+		//console.log('onload');
+		if(this.status == 200){
+			//console.log('status');
+			//document.getElementById("feedback").innerHTML = (this.responseText);
+			alert(this.responseText);
+		}
+	}
+	xhr.send();
+}
+
 </script>
     <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
