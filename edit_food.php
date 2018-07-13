@@ -354,8 +354,8 @@ function fr() {
 			2: Previewed in iframe, and form is made from that id, from database
 			3: user edits form, submits	
 			-->
-			<p>Here is where Food can be added to the menu!</p>
-			<button type="button" onclick="editFrame()">Edit Item</button>	
+			<p>Search in the above pane, then import the data to edit it.</p>
+			<button type="button" onclick="editFrame()">Import Item</button>	
 		</div>
 	
 		<div id="form" style="display:none">
@@ -391,16 +391,16 @@ function fr() {
 				newinput.type.value,
 				newinput.des.value,
 				document.getElementById('storeid').value
-				] )" value="Update Menue Item">
+				] )" value="Update Selected Item">
 			</form>	
 		</div>
 
 		<div id="hide" style="display:none">
 				<!-- Don't want to allow deletion of games, if they are hidden from customers it should be sufficient. Changing a 'hidden' var to allow public visilibity-->
-				<h2>Here is where games can be hidden!</h2>
+				<h2>Here is where items can be hidden!</h2>
 
 				<!-- UPDATE `game_data` where  'id' = game id (`public`) VALUE ('0');-->
-				<p>Find the game you want to hide in the preview pane <br>Then, confirm change below</p>
+				<p>Find the item you want to hide in the preview pane <br>Then, confirm change below</p>
 
 				<form name="visinput">
 					<input type="radio" name="visible" value="1"> Visible<br>
