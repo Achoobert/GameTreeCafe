@@ -34,6 +34,7 @@
 			$imgurl = $myarray['embedthumbnail'];
 			$pnum = $myarray['idealplyer'];
 			$youtube = $myarray['youtube'];
+			$des = $myarray['des'];
 			$pnumrange = ($myarray['minplyer']. ' to '.$myarray['maxplyer']);
 			
 			$timeresult = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `time` WHERE id ='". $myarray['playtimeusual']."'"));
@@ -52,26 +53,7 @@
 		$myarray =$gamename =$imgurl = $plytm = ('Error not found');
 		echo('<br>No game in database for ID: ') . $viewid . ('<br>');
 	}
-	$sql1 = "SELECT * FROM description WHERE id LIKE ($viewid)"; #is string
-	$rsltdes = mysqli_query($db,$sql1); #should only be one row
-	
-	if( mysqli_num_rows($rsltdes)>0){
-		while($row = mysqli_fetch_array($rsltdes, MYSQLI_ASSOC)) {
-			#echo ('working');
-			#MYSQLI_USE_RESULT
-			$myarray = $row; #This is perfect.
-			
-			if($_SESSION["lan"] == "en"){
-				$des = $myarray['engdes'];
-			}else{
-				$des = $myarray['thaides'];
-			}
-			#echo $myarray['thaides'];
-		}   
-	}else{
-		$engdes =$thaides = ('Error description not found');
-		#echo('<br>Decription not found for: ') . $viewid . ('<br>');
-	}
+
 
 ?>
 <head>
@@ -138,8 +120,13 @@
 				--><li>Ideal player number <?php echo $pnum; ?></li><!--
 				--><li>Player count: <?php echo $pnumrange; ?></li><!--
 				--><li>Play time <?php echo $plytm; ?></li></strong>
-				<?php echo (isset($des) ? "<li>".$des."</li>" : ''); ?>
 				
+				<?php 
+				$print = ($des != '' ? ('<li>'.$des.'</li>') : '');
+				echo $print;
+				$print = (!$vis ? ('<li>hidden</li>') : '');
+				echo $print;
+				?>				
 				</ul>
                 <!--<p class="clear"><?php echo $engdes; ?></p>-->
 				

@@ -140,13 +140,14 @@ function editFrame() {
 			document.getElementById('storeid').innerHTML = (arr[0]);
 			document.getElementById('name').value = (arr[1]);
 			document.getElementById('imgurl').innerHTML = (arr[2]);
-			document.getElementById('yturl').innerHTML = (arr[3]);
-			document.getElementById('maxply').value = (arr[4]);
+			document.getElementById('yturl').value = (arr[3]);
+			document.getElementById('maxply').value = (arr[7]);
 			document.getElementById('ply').value = (arr[5]);
 			document.getElementById('minply').value = (arr[6]);
-			document.getElementById('com').value = (arr[7]);
-			document.getElementById('time').value = (arr[8]);
-			document.getElementById('vis').value = (arr[9]);
+			$("input[name=complex][value="+(arr[4])+"]").prop("checked",true);
+			$("input[name=time][value="+(arr[8])+"]").prop("checked",true);
+			//document.getElementById('time').value = (arr[8]);
+			document.getElementById('des').value = (arr[9]);
 			
 			document.getElementById('imageUploadForm').value = (arr[2]);
 			console.log(document.getElementById('imageUploadForm').value);
@@ -159,12 +160,12 @@ function editFrame() {
 function addItem(garr) {
 	console.log(garr);
 	console.log("adding");
-	$.post("addfood.php",{gArray: garr},function(data,status){alert(data); document.getElementById("feedback").innerHTML = (data);});   
+	$.post("add.php",{gArray: garr},function(data,status){alert(data); document.getElementById("feedback").innerHTML = (data);});   
 }
 function updateItem(garr) {
 	console.log(garr);
-	console.log("adding");
-	$.post("addfood.php",{gArray: garr},function(data,status){alert(data); document.getElementById("feedback").innerHTML = (data);});   
+	console.log("updating");
+	$.post("add.php",{gArray: garr},function(data,status){alert(data); document.getElementById("feedback").innerHTML = (data);});   
 }
 function hideItem(i) {//newdesoldpic
 	console.log("hide");
@@ -175,11 +176,11 @@ function hideItem(i) {//newdesoldpic
 	var id = document.getElementById('storeid').innerHTML;
 	var vis = document.visinput.visible.value;
 	console.log(id ," ", vis);
-	appurl = appurl.concat("sql.admin.php?foodedit=3&id=", id ,"&vis=", vis ,"&submit=GO");
+	appurl = appurl.concat("sql.admin.php?edit=3&id=", id ,"&vis=", vis ,"&submit=GO");
 	if(i == 2){
 		console.log(i);
 		appurl = '';
-		appurl = appurl.concat("sql.admin.php?foodedit=5&id=", id ,"&submit=GO");
+		appurl = appurl.concat("sql.admin.php?edit=5&id=", id ,"&submit=GO");
 	}
 	console.log(appurl);	
 	// OPEN - type, url/file, async
@@ -201,30 +202,41 @@ function hideItem(i) {//newdesoldpic
 	xhr.send(); 
 	
 }
-function clearhistory(){
-	console.log("delete");
-	var xhr = new XMLHttpRequest();
-	var appurl = '';
-	var id = document.input.newview.value;
-	var vis = document.visinput.visible.value;
-	console.log(id ," ", vis);
-	appurl = appurl.concat("sql.admin.php?foodedit=3&id=", id ,"&vis=", vis ,"&submit=GO");
-	console.log(appurl);	
-	var appurl = 
-	// OPEN - type, url/file, async
-	xhr.open('GET', appurl, true); //you can just use the var
-	//console.log(xhr);
-		xhr.onload = function(){
-			//console.log('onload');
-			if(this.status == 200){
-				//console.log('status');
-				document.getElementById("feedback").innerHTML = (this.responseText);
-			}
-		}
-	xhr.send(); 
-	
-}
 
+ function test() {
+	 
+	document.getElementById('storeid').innerHTML = (1);
+	document.getElementById('name').value = ('name');
+	document.getElementById('imgurl').innerHTML = ('img/1.png');
+	document.getElementById('yturl').value = ('der.com');
+	document.getElementById('maxply').value = (4);
+	document.getElementById('ply').value = (2);
+	document.getElementById('minply').value = (2);
+    var rSel = 3;//(arr[4])
+	//console.log(rSelect);
+	//input[name='complex'][value=(rSelect)].prop("checked",true);
+	
+	//
+	//var rSelect = (arr[8]);
+	//console.log(rSelect);
+	//input[name='time'][value=(rSelect)].prop("checked",true);
+	//$("input[name=time][value=rSelect]").prop("checked",true);
+	
+	var time = document.newinput.t.value;
+	console.log('t '+time);
+	$("input[name=time][value="+rSel+"]").prop("checked",true);
+	$("input[name=complex][value="+rSel+"]").prop("checked",true);
+	var time = document.newinput.time.value;
+	console.log('time '+time);
+	
+	var com = document.newinput.complex.value;
+	console.log('complex '+(com));
+	$("input[name=complex][value="+rSel+"]").prop("checked",true);
+	var com = document.newinput.com.value;
+	console.log('com '+(com));
+	
+
+}
  function fa() {
     var x = document.getElementById("add");
     if (x.style.display === "none") {
@@ -269,90 +281,106 @@ function fh() {
 		preview.style.display = "none";
     }
 }
- 
-
-	
-
-
 </script>
-
-
-
-
-
-  
+ 
 <div class="pages">
     <div  class="page">
         <div class="page-content">
             <div class="content-block">
 			 <button onclick="fa()">Add Game</button>
-			 <button onclick="fe()">Edit Food</button>
-			 <button onclick="fh()">Hide Food</button>
-			 
+			 <button onclick="fe()">Edit Game</button>
+			 <button onclick="fh()">Hide Game</button>
+			 <button onclick="test()">test</button>
 			</div>
 
 			
 			<div id="preview" style="display:none">
-			
 				<iframe id="app" src="" width="270" height="150"></iframe><div id="storeid"></div>
 				<form name="input">
 					<INPUT type="text" name="newview" id="newview">
 					<button type="button" onclick="loadFrame()">Search</button>
 				</form>
-				
 			</div>
 			
 			
 		<div id="add" style="display:block">    
 			<!--  new item form area-->
-			<p>Here is where new games can be added to the database!</p>		
+			<p>Here is where new games can be added to the database!</p>
 		</div>
 		
-
 		<div id="edit" style="display:none">	
-			<!--  edit item form area
-			1: see 'find game to edit: input it
-			2: Previewed in iframe, and form is made from that id, from database
-			3: user edits form, submits	
-			-->
-			<p>Here is where Food can be added to the menu!</p>
-			<button type="button" onclick="editFrame()">Edit Item</button>	
+			<p>Search for an item, then import it to edit details</p>
+			<button type="button" onclick="editFrame()">Import Item</button>	
 		</div>
 	
 		<div id="form" style="display:block">
 			<form name="photo" id="imageUploadForm" enctype="multipart/form-data" action="" method="post">
 				Select image to upload:
 				<input type="file" name="fileToUpload" id="fileToUpload">
-				<!--<input type="submit" name="upload" value="Upload img" />-->
 			</form>
 			<div id="imgurl" ></div>
+			
 			<form name="newinput" action="" onsubmit="return addGame(this);">
-				Food name: <input type="text" name="name" id="name"><br>
-				Bhat: <input type="number" name="bhat" id="bhat" step=".01" max='999' min='.01'><br>
-				Type:   <select name="type" id="type">	
-					<option value=1>Drink</option>");
-					<option value=2>Meal</option>");
-					<option value=3>Snack</option>");
-				</select><br>
+				Game name: <input type="text" name="name" id="name"><br>
+				<b>Players</b>
+				Min: <input type="number" name="minply" id="minply" step="1" max='12' min='1'>
+				Ideal: <input type="number" name="ply" id="ply" step="1" max='12' min='1'>
+				Max: <input type="number" name="maxply" id="maxply" step="1" max='12' min='1'><br>
+				<b>Complexity</b>:<br>
+				<?php //complex
+				   $sql = "SELECT * FROM com"; #
+				   $result = mysqli_query($db,$sql); #
+				   if( mysqli_num_rows($result)>0){
+						while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { 
+							$myarray = $row;
+							echo ( "<input type='radio' name='complex' id='com'  value='".$myarray['id']."'>". $myarray['value']."<br>");
+						}   
+					}
+				?>
+
+				<b>Play Time</b>:<br>
+				<?php 
+				   $sql = "SELECT * FROM time"; #is string
+				   $result = mysqli_query($db,$sql); #is query on sql, runs when called
+				   #echo mysqli_num_rows($result);
+				   if( mysqli_num_rows($result)>0){
+						while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { #MYSQLI_USE_RESULT
+							$myarray = $row;
+							echo ( "<input type='radio'  name='time' id='t' value='".$myarray['id']."'>". $myarray['trange']."<br>");
+						}   
+					}
+				?>
+
+				Youtube embed: <input type="text" name="yturl" id="yturl"><br>
 				Short Description: <input type="text" name="des" id="des">
 				<br>
 				<input type="button" name="submitnew" onclick="addItem(
 				[
-				document.getElementById('imgurl').innerHTML,
+				'',
 				newinput.name.value,
-				newinput.bhat.value,
-				newinput.type.value,
-				newinput.des.value, ''] )" value="Save as New Item">
+				document.getElementById('imgurl').innerHTML,
+				newinput.yturl.value,
+				newinput.maxply.value,
+				newinput.ply.value,
+				newinput.minply.value,
+				newinput.complex.value,
+				newinput.time.value,
+				newinput.des.value
+				] )" value="Save as New Item">
 				<!--document.getElementById('fileToUpload').value-->
 				<input type="button" name="submitchange" onclick="updateItem(
 				[
-				document.getElementById('imgurl').innerHTML,
+				document.getElementById('storeid').innerHTML,
 				newinput.name.value,
-				newinput.bhat.value,
-				newinput.type.value,
-				newinput.des.value,
-				document.getElementById('storeid').value
-				] )" value="Update Menue Item">
+				document.getElementById('imgurl').innerHTML,
+				newinput.yturl.value,
+				newinput.maxply.value,
+				newinput.ply.value,
+				newinput.minply.value,
+				newinput.complex.value,
+				newinput.time.value,
+				newinput.des.value
+				] )" value="Update Selected Item">
 			</form>	
 		</div>
 
