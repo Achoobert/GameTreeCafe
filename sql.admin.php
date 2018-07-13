@@ -1,6 +1,6 @@
 <?php
    define('DB_SERVER', 'localhost');
-   define('DB_USERNAME', 'apacheserveruser'); #read/edit type account with only update preveleges
+   define('DB_USERNAME', 'apacheserver'); #read/edit type account with only update preveleges
    define('DB_PASSWORD', 'iamapache12');
    define('DB_DATABASE', 'gametree_games');
    #here is where paramiterized queries start
@@ -50,8 +50,8 @@
 		<p>Sex: $sex1</p>
 		<p>Email: $email1</p>");
 	}  */
-if( isset($_GET['edit'])){
-	#stopgap until I figure out prepared statments?
+if( isset($_GET['foodedit'])){
+	$edit = ($_GET['foodedit']);
 	if ($edit == 1) { #ord tnum viewid
 		#INSERT INTO `orders` (`id`, `time_ord`, `tnum`, `item`) VALUES (NULL, CURRENT_TIMESTAMP, '13', '4'); DATE_FORMAT(CURRENT_TIMESTAMP, \"%H:%i\") 
 		$sql = "INSERT INTO `orders` (`id`, `time_ord`, `tnum`, `item`) VALUES (NULL, CURRENT_TIMESTAMP, '".$tnum."', '".$item."')";
@@ -89,8 +89,75 @@ if( isset($_GET['edit'])){
 			echo "Error not hidden";
 		}
 
+	}	
+	if ($edit == 4) { #edit: delete a user
+		#UPDATE `game_data` SET `visible`= 1 WHERE `id` = 2
+		$uname = ($_GET['uname']);
+		$sql = "DELETE FROM `orders` WHERE `uname` = '". $uname."'";
+		echo ($sql);
+		#echo ($item);
+		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
+			echo "user ".$uname."\'s tab has been cleared: ". $vis; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+		} else {
+			echo "Error not hidden";
+		}
+
+	}	
+}	
+if( isset($_GET['edit'])){
+		
+	if ($edit == 1) { #ord tnum viewid
+		#INSERT INTO `orders` (`id`, `time_ord`, `tnum`, `item`) VALUES (NULL, CURRENT_TIMESTAMP, '13', '4'); DATE_FORMAT(CURRENT_TIMESTAMP, \"%H:%i\") 
+		$sql = "INSERT INTO `orders` (`id`, `time_ord`, `tnum`, `item`) VALUES (NULL, CURRENT_TIMESTAMP, '".$tnum."', '".$item."')";
+		#echo ($item);
+		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
+			echo "New order stored successfully!";#'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+		} else {
+			echo "Error";
+		}
+
+	} 
+	#stopgap until I figure out prepared statments?
+	#stopgap until I figure out prepared statments?
+	if ($edit == 2) { #ord tnum viewid
+		
+		#"DELETE FROM `orders` WHERE `id`  = 10;
+		#sql.php?ord=2&oid=11&tnum=3&submit=GO
+		$sql = "DELETE FROM `orders` WHERE `id`  = ".$oid;
+		#echo ($item);
+		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
+			echo "Order ".$oid." done!";#'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+		} else {
+			echo "Error";
+		}
+
+	}
+	if ($edit == 3) { #edit: hide 
+		#UPDATE `game_data` SET `visible`= 1 WHERE `id` = 2
+		$sql = "UPDATE `game_data` SET `visible`= ". $vis ." WHERE `id` = ". $id;
+		#echo ($sql);
+		#echo ($item);
+		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
+			echo "item ".$id." is visible: ". $vis; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+		} else {
+			echo "Error not hidden";
+		}
+
+	}	
+	if ($edit == 4) { #edit: delete
+		#UPDATE `game_data` SET `visible`= 1 WHERE `id` = 2
+		$sql = "UPDATE `game_data` SET `visible`= ". $vis ." WHERE `id` = ". $id;
+		#echo ($sql);
+		#echo ($item);
+		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
+			echo "item ".$id." is visible: ". $vis; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+		} else {
+			echo "Error not hidden";
+		}
+
 	}
 }	
+
 if( isset($_GET['ord'])){
 	#stopgap until I figure out prepared statments?
 	if ($ord == 1) { #ord tnum viewid
@@ -152,6 +219,7 @@ if( isset($_GET['ord'])){
 	}
 
 }	
+
 ?>
 
 <?php

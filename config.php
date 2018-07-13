@@ -19,9 +19,9 @@
 	//$_SESSION["gid"] = 2;
 	//('cookie', $_COOKIE) 
 	if (isset($_COOKIE[$cookie_name])) {
-	echo ("<script> console.log('The uname is:".$_COOKIE[$cookie_name]."');</script>");
+	//echo ("<script> console.log('The uname is:".$_COOKIE[$cookie_name]."');</script>");
 	} else {
-		echo ("<script> console.log('No cookie');</script>");
+		//echo ("<script> console.log('No cookie');</script>");
 	}	
 	
 	//<script> console.log('onload');</script>

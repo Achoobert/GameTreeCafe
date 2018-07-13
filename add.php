@@ -1,14 +1,16 @@
 
 <?php
-include("config.php");
+include("sql.admin.php");
 $a = ($_POST['gArray']);
 
 #C:\fakepath\29791949_247105115833344_1872063849327230976_n.jpg
 #\
-
-$imgaddr = substr($a[1], strrpos($a[1], '\\') + 1);
-$imgaddr = "uploads/" .$imgaddr;
-
+$imgaddr = $a[1];
+echo (substr($imgaddr, 0, 4));
+if(substr($imgaddr, 0, 4) != "img/"){
+	$imgaddr = substr($a[1], strrpos($a[1], '\\') + 1);
+	$imgaddr = "img/" .$imgaddr;
+}
 $iValues = "( null,'".$a[0]."','".$imgaddr."',".$a[2].','.$a[3].','.$a[4].','.$a[5].','.$a[6].','.$a[7].','.$a[8].','.$a[9].','.$a[10] .', 1 )';
 
 $sql = "INSERT INTO `game_data`(`id`, `gamename`, `embedthumbnail`, `genera1`, `genera2`, `mechanic1`, `mechanic2`, `idealplyer`, `minplyer`, `maxplyer`, `playtimemin`, `playtimeusual`, `visible`) VALUES". $iValues ;

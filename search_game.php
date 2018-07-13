@@ -75,12 +75,12 @@
 					   echo 'no values :( ';
 					}
 				?>
-				</select>
+				</select><br>
 				Players:
 				  <input type="number" name="pnum" step="1" max='12' min='1'>
 				  
 			</form>	
-			<button type="button" onclick="loadSearch()">Search</button>			
+			<br><button type="button" onclick="loadSearch()">Search</button>			
 			<button type="button" onclick="clearFilter()">Clear</button>			
 		</div>
 		</p>
