@@ -10,7 +10,7 @@ $searchArea = 'unset';
 if ($type == "'food'") {
 	$searchArea =  ("`food` WHERE `fname`");
 }else if ($type == "'game'") {
-	$searchArea = ("$`game_data` WHERE `gamename`");
+	$searchArea = ("`game_data` WHERE `gamename`");
 }
 $sql = ("SELECT * FROM ".$searchArea." = " . $name); 
 //echo ($sql);
