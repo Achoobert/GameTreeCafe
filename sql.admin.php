@@ -136,15 +136,15 @@ if( isset($_GET['edit'])){
 		}
 
 	}	
-	if ($edit == 4) { #edit: delete
-		#UPDATE `game_data` SET `visible`= 1 WHERE `id` = 2
-		$sql = "UPDATE `game_data` SET `visible`= ". $vis ." WHERE `id` = ". $id;
-		#echo ($sql);
+	if ($edit == 5) { #edit: delete a food item
+		$id = ($_GET['id']);
+		$sql = "DELETE FROM `game_data` WHERE `id` = ". $id."";
+		//echo ($sql);
 		#echo ($item);
 		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
-			echo "item ".$id." is visible: ". $vis; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+			echo "item ".$id." is permenently gone:"; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
 		} else {
-			echo "Error not hidden";
+			echo "Error not deleted";
 		}
 
 	}
