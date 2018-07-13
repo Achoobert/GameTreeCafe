@@ -28,47 +28,15 @@
 		while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { #MYSQLI_USE_RESULT
 			$myarray = $row; #This is super janky.
 			$gid = $myarray['id'] ;
+			$vis = $myarray['visible'] ;
 			$gamename = $myarray['fname'] ;
 			$imgurl = $myarray['img_url'];
 			$bhat = $myarray['bhat'];
-			#$pnumrange = ($myarray['minplyer']. ' to '.$myarray['maxplyer']);
-			
-			#$timeresult = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `time` WHERE id ='". $myarray['playtimeusual']."'"));
-			#$plytm = $timeresult['trange'];
-			
-			#$mechresult1 = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `mechanics` WHERE id ='". $myarray['mechanic1']."'"));
-			#$mechresult2 = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `mechanics` WHERE id ='". $myarray['mechanic2']."'"));
-			#$mech = ($mechresult1['mech'].', '.$mechresult2['mech']);
-			
-			#$genraresult1 = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `genera` WHERE id ='". $myarray['genera1']."'"));
-			#$genraresult2 = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `genera` WHERE id ='". $myarray['genera2']."'"));
-			#$genera = ($genraresult1['genera'].', '.$genraresult2['genera']);
-			
-			#echo " Game name ", $row['gamename'], " yes? <br>";
+			$des = $myarray['des'];
 		}   
 	} else{
 		$myarray =$gamename =$imgurl = $plytm = ('Error not found');
 		echo('<br>No game in database for ID: ') . $viewid . ('<br>');
-	}
-	$sql1 = "SELECT * FROM description WHERE id LIKE ($viewid)"; #is string
-	$rsltdes = mysqli_query($db,$sql1); #should only be one row
-	
-	if( mysqli_num_rows($rsltdes)>0){
-		while($row = mysqli_fetch_array($rsltdes, MYSQLI_ASSOC)) {
-			#echo ('working');
-			#MYSQLI_USE_RESULT
-			$myarray = $row; #This is super janky.
-			
-			if($_SESSION["lan"] == "en"){
-				$des = $myarray['engdes'];
-			}else{
-				$des = $myarray['thaides'];
-			}
-			#echo $myarray['thaides'];
-		}   
-	}else{
-		$engdes =$thaides = ('');
-		#echo('<br>No game in decription database for ID: ') . $viewid . ('<br>');
 	}
 	
 ?>
@@ -105,10 +73,15 @@
 					var $viewid= (<?php echo $viewid; ?>);
 					console.log($viewid);
 					</script>
-				<ul><!--
-				--><strong><li><?php echo $gamename; ?></li><!--
-				
-				--><li>Cost: <?php echo $bhat; ?> baht</li>
+				<ul>
+				<strong><li><?php echo $gamename; ?></li>
+				<li>Cost: <?php echo $bhat; ?> baht</li>
+				<?php 
+				$print = ($des != '' ? ('<li>'.$des.'</li>') : '');
+				echo $print;
+				$print = (!$vis ? ('<li>hidden</li>') : '');
+				echo $print;
+				?>
 				</ul>
 				
 				<button type="button" onclick="orderItem(<?php echo $viewid; ?>)">Order This Item</button>

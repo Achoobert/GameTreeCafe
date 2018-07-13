@@ -1,11 +1,11 @@
 <?php
+//this is admin file for hide/delete food, a user's tab post-payment, and hide/delete games
    define('DB_SERVER', 'localhost');
-   define('DB_USERNAME', 'apacheserver'); #read/edit type account with only update preveleges
+   define('DB_USERNAME', 'apacheserver'); #admin deleteing priveledges
    define('DB_PASSWORD', 'iamapache12');
    define('DB_DATABASE', 'gametree_games');
    #here is where paramiterized queries start
    $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-   
 	if (!$db) {
 		die("Connection failed: " . mysqli_connect_error());
 	}
@@ -35,21 +35,6 @@
 	$id = (isset($_GET['id']) ? $_GET['id'] : '');
 	$vis = (isset($_GET['vis']) ? $_GET['vis'] : '');
 
-	#echo ('opening the sql page');
-
-
-
-	#Storing Order
-/* 	if (isset($_GET['submit'])) {
-		$sql = "INSERT INTO 'orders' ('id', 'tnum', 'item') VALUES (NULL, '".$firstname1."', '".$lastname1."')";
-		$result = mysqli_query($db,$sql); #is query on sql, runs when called
-
-		echo ("<p>First name: $firstname1</p>
-		<p>Last name: $lastname1</p>
-		<p>Date of Birth: $dob1</p>
-		<p>Sex: $sex1</p>
-		<p>Email: $email1</p>");
-	}  */
 if( isset($_GET['foodedit'])){
 	$edit = ($_GET['foodedit']);
 	if ($edit == 1) { #ord tnum viewid
@@ -63,10 +48,7 @@ if( isset($_GET['foodedit'])){
 		}
 
 	} 
-	#stopgap until I figure out prepared statments?
-	#stopgap until I figure out prepared statments?
-	if ($edit == 2) { #ord tnum viewid
-		
+	if ($edit == 2) { #depreciated?
 		#"DELETE FROM `orders` WHERE `id`  = 10;
 		#sql.php?ord=2&oid=11&tnum=3&submit=GO
 		$sql = "DELETE FROM `orders` WHERE `id`  = ".$oid;
@@ -78,13 +60,13 @@ if( isset($_GET['foodedit'])){
 		}
 
 	}
-	if ($edit == 3) { #edit: hide 
+	if ($edit == 3) { #http://localhost/sql.admin.php?foodedit=3&id=34&vis=0&submit=GO
 		#UPDATE `game_data` SET `visible`= 1 WHERE `id` = 2
-		$sql = "UPDATE `game_data` SET `visible`= ". $vis ." WHERE `id` = ". $id;
-		#echo ($sql);
+		$sql = "UPDATE `food` SET `visible`= ". $vis ." WHERE `id` = ". $id;
+		//echo ($sql);
 		#echo ($item);
 		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
-			echo "item ".$id." is visible: ". $vis; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+			echo "item ".$id." is set to visible state: ". $vis; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
 		} else {
 			echo "Error not hidden";
 		}
@@ -94,12 +76,24 @@ if( isset($_GET['foodedit'])){
 		#UPDATE `game_data` SET `visible`= 1 WHERE `id` = 2
 		$uname = ($_GET['uname']);
 		$sql = "DELETE FROM `orders` WHERE `uname` = '". $uname."'";
-		echo ($sql);
+		//echo ($sql);
 		#echo ($item);
 		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
-			echo "user ".$uname."\'s tab has been cleared: ". $vis; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+			echo "user ".$uname."\'s tab has been cleared: ". $vis;
 		} else {
-			echo "Error not hidden";
+			echo "Error not deleted";
+		}
+
+	}	
+	if ($edit == 5) { #edit: delete a food item
+		$id = ($_GET['id']);
+		$sql = "DELETE FROM `food` WHERE `id` = ". $id."";
+		//echo ($sql);
+		#echo ($item);
+		if (mysqli_query($db, $sql)) { #is query on sql, runs when called
+			echo "item ".$id." is permenently gone:"; #'sucessfully ordered a (sqlqery'food where like viewid') for table TNUM
+		} else {
+			echo "Error not deleted";
 		}
 
 	}	
@@ -117,8 +111,6 @@ if( isset($_GET['edit'])){
 		}
 
 	} 
-	#stopgap until I figure out prepared statments?
-	#stopgap until I figure out prepared statments?
 	if ($edit == 2) { #ord tnum viewid
 		
 		#"DELETE FROM `orders` WHERE `id`  = 10;
@@ -220,21 +212,4 @@ if( isset($_GET['ord'])){
 
 }	
 
-?>
-
-<?php
- /* function dropdown(tname) {
-	$sql = "SELECT * FROM $tname"; #is string
-	$result = mysqli_query($db,$sql); #is query on sql, runs when called
-   if( mysqli_num_rows($result)>0){
-		while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { #MYSQLI_USE_RESULT
-			foreach($row as $key => $value){
-			<option value=echo ("<option value=' ". $key ."'>".$value."</option>"); #
-			}
-		}   
-	}
-	else{
-	   echo 'no values :( ';
-	}
-}  */
 ?>

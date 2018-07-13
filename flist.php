@@ -19,7 +19,7 @@
 	echo ('<head><link rel="stylesheet" href="css/styles.css"></head>');
 	 
 	#SELECT `id`, `bhat`, `fname`, `img_url`, `type` FROM `food` WHERE 1
-	$searchparam = ' WHERE ';
+	$searchparam = ' WHERE `visible` =1 AND';
 	$and = '';
 	if($fname != ' '){
 		$searchparam = ($searchparam . "`fname` LIKE $fname");

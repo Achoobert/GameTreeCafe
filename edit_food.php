@@ -162,23 +162,29 @@ function editFrame() {
 function addItem(garr) {
 	console.log(garr);
 	console.log("adding");
-	$.post("addfood.php",{gArray: garr},function(data,status){document.getElementById("feedback").innerHTML = (data);});   
+	$.post("addfood.php",{gArray: garr},function(data,status){alert(data); document.getElementById("feedback").innerHTML = (data);});   
 }
 function updateItem(garr) {
 	console.log(garr);
 	console.log("adding");
-	$.post("addfood.php",{gArray: garr},function(data,status){document.getElementById("feedback").innerHTML = (data);});   
+	$.post("addfood.php",{gArray: garr},function(data,status){alert(data); document.getElementById("feedback").innerHTML = (data);});   
 }
-function hideGame() {
+function hideItem(i) {//newdesoldpic
 	console.log("hide");
+	console.log(i);
 	var xhr = new XMLHttpRequest();
 	var appurl = '';
-	var id = document.input.newview.value;
+	//document.getElementById('storeid').value
+	var id = document.getElementById('storeid').innerHTML;
 	var vis = document.visinput.visible.value;
 	console.log(id ," ", vis);
 	appurl = appurl.concat("sql.admin.php?foodedit=3&id=", id ,"&vis=", vis ,"&submit=GO");
+	if(i == 2){
+		console.log(i);
+		appurl = '';
+		appurl = appurl.concat("sql.admin.php?foodedit=5&id=", id ,"&submit=GO");
+	}
 	console.log(appurl);	
-	var appurl = 
 	// OPEN - type, url/file, async
 	xhr.open('GET', appurl, true); //you can just use the var
 	//console.log(xhr);
@@ -186,6 +192,12 @@ function hideGame() {
 			//console.log('onload');
 			if(this.status == 200){
 				//console.log('status');
+				var container = document.getElementById("app");
+				var content = container.innerHTML;
+				container.innerHTML= content; 
+				//if(i == 2){
+					alert(this.responseText);
+				//}
 				document.getElementById("feedback").innerHTML = (this.responseText);
 			}
 		}
@@ -394,7 +406,8 @@ function fr() {
 					<input type="radio" name="visible" value="1"> Visible<br>
 					<input type="radio" name="visible" value="0"> Hide 
 				</form>				
-				<button type="hideGame" onclick="hideGame()">Submit Change</button> <!-- type="hideGame" onclick="hideGame()-->
+				<button type="hideItem" onclick="hideItem(1)">Submit Change</button> 
+				<button type="deleteItem" onclick="hideItem(2)">Delete</button> 
 			</div>
 		<div id="receipt" > 
 <div>		

@@ -92,7 +92,7 @@ function hideGame() {
 	var id = document.input.newview.value;
 	var vis = document.visinput.visible.value;
 	console.log(id ," ", vis);
-	appurl = appurl.concat("sql.php?edit=3&id=", id ,"&vis=", vis ,"&submit=GO");
+	appurl = appurl.concat("sql.admin.php?edit=3&id=", id ,"&vis=", vis ,"&submit=GO");
 	console.log(appurl);	
 	var appurl = 
 	// OPEN - type, url/file, async

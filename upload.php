@@ -1,11 +1,3 @@
-
-<!--/* 
-$target_dir = "uploads/" - specifies the directory where the file is going to be placed
-$target_file specifies the path of the file to be uploaded
-$uploadOk=1 is not used yet (will be used later)
-$imageFileType holds the file extension of the file (in lower case)
-Next, check if the image file is an actual image or a fake image */<br>-->
-
 <?php
 $target_dir = "img/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -24,7 +16,7 @@ if(isset($_POST["submit"])) {
 }
 // Check if file already exists
 if (file_exists($target_file)) {
-    echo "Sorry, file already exists";
+    echo ("img/".basename( $_FILES["fileToUpload"]["name"]));
     $uploadOk = 0;
 }
 // Check file size
@@ -40,7 +32,7 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 }
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    echo ", your file was not uploaded.";
+    echo "";#, your file was not uploaded.
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
