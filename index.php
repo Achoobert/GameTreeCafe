@@ -40,6 +40,21 @@ xhr.open('GET', "flist.php?type=1&submit=GO", true); //flist.php?type=1&submit=G
 	}
 xhr.send();
 }
+function loadDesserts(){
+console.log("drink");
+var xhr = new XMLHttpRequest();
+// OPEN - type, url/file, async
+xhr.open('GET', "flist.php?type=4&submit=GO", true); //flist.php?type=1&submit=GO
+//console.log(xhr);
+	xhr.onload = function(){
+		//console.log('onload');
+		if(this.status == 200){
+			//console.log('status');
+			document.getElementById("demo1").innerHTML = (this.responseText);
+		}
+	}
+xhr.send();
+}
 
 function loadFood(){
 console.log("food");

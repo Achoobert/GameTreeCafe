@@ -3,6 +3,7 @@
 if(!isset($db)){
 	include("config.php");
 }
+//
 $type = (isset($_GET['type']) ? $_GET['type'] : '');
 $name = (isset($_GET['name']) ? $_GET['name'] : '');
 $id;

@@ -15,7 +15,7 @@ $iValues = ("(null,'".$a[2]."', \"".$a[1]." \", '".$imgaddr."', \"".$a[3]."\",\"
 $sql = "INSERT INTO `food`(`id`, `bhat`, `fname`, `img_url`, `type`, `des`) VALUES". $iValues ;
 //edit existing
 if($a[5] != ""){
-	$sql = "UPDATE `food` SET  `bhat`= \"".$a[2]."\", `fname`= '".$a[1]."', `img_url`= '".$imgaddr."', `type`= '".$a[3]."\", `des`= \" ".$a[4]."' WHERE `id` = ".$a[5]."";
+	$sql = "UPDATE `food` SET  `bhat`= \"".$a[2]."\", `fname`= '".$a[1]."', `img_url`= '".$imgaddr."', `type`= '".$a[3]."', `des`= \" ".$a[4]."\" WHERE `id` = ".$a[5]."";
 }
 //echo $sql;
 if (mysqli_query($db, $sql)) { #is query on sql, runs when called

@@ -21,15 +21,15 @@ $imgaddr = $a[2];//updated in uploader should be clean now
 	$imgaddr = "img/" .$imgaddr;
 } */
 // 6,4 4,2 2,1 1,3 3,5
-$iValues = "( null,'$a[1]','$imgaddr','$a[3]',$a[7],$a[5],$a[6],$a[4],$a[8], '$a[9]', 1 )";
+$iValues = "( null,\"$a[1]\",'$imgaddr','$a[3]',$a[7],$a[5],$a[6],$a[4],$a[8], \"$a[9]\", 1 )";
 
 			//null,'name','img/1.png','der.com','der.com',3,2,2,4,3, 1 )
 
-//$sql = "INSERT INTO `game_data`(`id`, `gamename`, `embedthumbnail`, `youtube`, `complex`, `idealplyer`, `minplyer`, `maxplyer`, `playtimeusual`, `des`, `visible`) VALUES". $iValues ;
+$sql = "INSERT INTO `game_data`(`id`, `gamename`, `embedthumbnail`, `youtube`, `complex`, `idealplyer`, `minplyer`, `maxplyer`, `playtimeusual`, `des`, `visible`) VALUES". $iValues ;
 
 if($a[0] != ""){
 	//UPDATE `game_data` SET `gamename`=[value-2],`embedthumbnail`=[value-3],`youtube`=[value-4],`complex`=[value-5],`idealplyer`=[value-6],`minplyer`=[value-7],`maxplyer`=[value-8],`playtimeusual`=[value-9],`visible`=[value-10] WHERE 1
-	$sql = "UPDATE `game_data` SET `gamename`='".$a[1]."', `embedthumbnail`='".$imgaddr."', `youtube`='".$a[3]."', `complex`='".$a[7]."', `idealplyer`='".$a[5]."', `minplyer`='".$a[6]."', `maxplyer`='".$a[4]."', `playtimeusual`='".$a[8]."',`des`='".$a[9]."', `visible`=1 WHERE `id` = ".$a[0];
+	$sql = "UPDATE `game_data` SET `gamename`=\"".$a[1]."\", `embedthumbnail`='".$imgaddr."', `youtube`='".$a[3]."', `complex`='".$a[7]."', `idealplyer`='".$a[5]."', `minplyer`='".$a[6]."', `maxplyer`='".$a[4]."', `playtimeusual`='".$a[8]."',`des`=\"".$a[9]."\", `visible`=1 WHERE `id` = ".$a[0];
 }
 //echo $sql;
 if (mysqli_query($db, $sql)) { #is query on sql, runs when called

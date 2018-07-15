@@ -44,6 +44,7 @@
             
 			<button type="button" onclick="loadDrink()">Drinks</button>
 			<button type="button" onclick="loadSnacks()">Snacks</button>
+			<button type="button" onclick="loadDesserts()">Desserts</button>
 			<button type="button" onclick="loadFood()">Meals</button>			
 			</div>
 

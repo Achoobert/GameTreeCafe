@@ -374,6 +374,7 @@ function fr() {
 					<option value=1>Drink</option>");
 					<option value=2>Meal</option>");
 					<option value=3>Snack</option>");
+					<option value=4>Dessert</option>");
 				</select><br>
 				Short Description: <input type="text" name="des" id="des">
 				<br>
