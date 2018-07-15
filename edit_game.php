@@ -246,9 +246,6 @@ function hideItem(i) {//newdesoldpic
 		edit.style.display = "none";
 		hide.style.display = "none";
 		//receipt.style.display = "none";
-    } else {
-        x.style.display = "none";
-		form.style.display = "none";
     }
 }
 function fe() {
@@ -261,11 +258,7 @@ function fe() {
 		add.style.display = "none";
 		hide.style.display = "none";
 		//receipt.style.display = "none";
-    } else {
-        x.style.display = "none";
-		preview.style.display = "none";
-		form.style.display = "none";
-    }
+    } 
 }
 function fh() {	
     var x = document.getElementById("hide");
@@ -276,9 +269,6 @@ function fh() {
 		edit.style.display = "none";
 		add.style.display = "none";
 		//receipt.style.display = "none";
-    } else {
-        x.style.display = "none";
-		preview.style.display = "none";
     }
 }
 </script>
