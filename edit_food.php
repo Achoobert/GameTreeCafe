@@ -145,13 +145,15 @@ function editFrame() {
 			//2,75,Leo Beer,/img/f/leo.png,1,
 			//var test = xhr.responseText;
 			//console.log(test);
+			// id vis bhat 3name 4imgurl, 5type, des
 			arr = xhr.responseText.split(',');
 			console.log(arr);
-			document.getElementById('name').value = (arr[2]);
-			document.getElementById('type').value = (arr[4]);
-			document.getElementById('bhat').value = (arr[1]);
-			document.getElementById('imageUploadForm').value = (arr[3]);
-			document.getElementById('imgurl').innerHTML = (arr[3]);
+			document.getElementById('name').value = (arr[3]);
+			document.getElementById('type').value = (arr[5]);
+			document.getElementById('bhat').value = (arr[2]);
+			document.getElementById('des').value = (arr[6]);
+			document.getElementById('imageUploadForm').value = (arr[4]);
+			document.getElementById('imgurl').innerHTML = (arr[4]);
 			console.log(document.getElementById('imageUploadForm').value);
 			document.getElementById('storeid').value = (arr[0]);
 		}
